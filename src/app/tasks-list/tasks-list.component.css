@@ -1,0 +1,9 @@
+div {
+  border-style: solid;
+  border-color: blue;
+
+  float: left;
+  width: 50%;
+
+  text-align: center;
+}

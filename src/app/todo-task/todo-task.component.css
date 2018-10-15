@@ -1,0 +1,14 @@
+li {
+background-color:bisque;
+margin: 5px;
+}
+
+.odd-li{
+  background-color: aqua;
+  margin: 5px;
+}
+
+.last-li{
+  background-color: burlywood;
+  margin: 5px;
+}

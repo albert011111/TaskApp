@@ -1,0 +1,9 @@
+
+      <div> Zadania wykonane
+          <ul>
+            <p>Zadania zrobione: {{tasksDoneChild.length}}</p>
+            <li appChecked *ngFor="let taskDone of tasksDoneChild">
+              {{taskDone.name}}
+            </li>
+          </ul>
+        </div>

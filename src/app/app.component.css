@@ -1,0 +1,23 @@
+table
+{
+  width: 100%;
+  background-color: antiquewhite;
+  border: 3px solid black;
+  text-align: center;
+}
+tr{
+  border: 1px solid black;
+}
+
+td{
+  border: 1px solid  black;
+}
+
+.color{
+  color: brown
+}
+
+.color2{
+  color: rgb(51, 210, 30);
+}
+

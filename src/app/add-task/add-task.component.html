@@ -1,0 +1,19 @@
+<form [formGroup]="taskForm" (ngSubmit)="onSubmit()">
+
+  <div>
+    <label>
+      Nazwa:
+      <input type="text" formControlName="name" required>
+    </label>
+  </div>
+  <div>
+  <label>
+    Data utworzenia:
+    <input type="date" formControlName="createDate" required>
+  </label>
+</div>
+<div>
+  <button type="submit" [disabled]="!taskForm.valid">Zapisz zadanie</button>
+</div>
+
+</form>
