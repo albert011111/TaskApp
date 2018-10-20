@@ -18,6 +18,8 @@ import { TransformTaskPipe } from './shared/transform-task.pipe';
 import { SortPipePipe } from './shared/sort-pipe.pipe';
 import { HttpClientModule } from '@angular/common/http';
 import { TasksListComponent } from './tasks-list/tasks-list.component';
+import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
+import { AppRoutingModule } from './app-routing.module';
 
 
 @NgModule({
@@ -34,11 +36,12 @@ import { TasksListComponent } from './tasks-list/tasks-list.component';
     CheckedDirective,
     TransformTaskPipe,
     SortPipePipe,
-    TasksListComponent
+    TasksListComponent,
+    PageNotFoundComponent
   ],
   bootstrap: [AppComponent],
   imports: [
-    BrowserModule, FormsModule, NgbModule, HttpClientModule, ReactiveFormsModule
+    BrowserModule, FormsModule, NgbModule, HttpClientModule, ReactiveFormsModule, AppRoutingModule
   ],
   providers: [TaskService]
 })

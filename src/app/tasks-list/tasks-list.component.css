@@ -1,9 +1,18 @@
 div {
-  border-style: solid;
-  border-color: blue;
+  border-style: none;
+  border-color: black;
+  
 
   float: left;
-  width: 50%;
+  width: 100%;
 
   text-align: center;
+  clear: both;
 }
+
+table{
+  padding: 10px;
+  width: 40%
+}
+
+

@@ -1,15 +1,12 @@
-<div>
-  <h3>tasks-list works!</h3>
-</div>
-
-<div>
-  <table class="table table-hover table-sm">
+<div padding=10px>
+  <table class="table table-hover table-lg" align="center">
     <thead class="thead-dark">
       <tr>
         <th scope="col">LP.</th>
         <th scope="col">Nazwa</th>
         <th scope="col">Utworzono</th>
-        <th scope="col">Status</th>
+        <th scope="col">ID</th>
+        <th scope="col">Akcja</th>
       </tr>
     </thead>
     <tbody>
@@ -17,15 +14,13 @@
         <td>{{i+1}}</td>
         <td>{{task.name}}</td>
         <td>{{task.createDate}}</td>
-        <td><button type="button" class="btn btn-outline-dark btn-sm">Usuń</button></td>
+        <td>{{task.id}}</td>
+        <td><button type="button" class="btn btn-outline-danger btn-sm" (click)="onDeleteClick(task.id)">Usuń</button></td>
       </tr>
-      <tr>
-        <td>Numer</td>
-        <td>Dwa</td>
-        <td>Trzy</td>
-        <td>cztery</td>
-      </tr>
-
     </tbody>
   </table>
+
+</div>
+<div>
+  <button type="button" class="btn btn-outline-dark btn-m">Dodaj zadanie</button>
 </div>

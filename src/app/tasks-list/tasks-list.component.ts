@@ -22,6 +22,13 @@ export class TasksListComponent implements OnInit {
     this.tasks$ = this.tasksService.getTasks();
   }
 
+  onDeleteClick(taskId: number) {
+    console.log(taskId + ' onDeleteClick ');
+    this.tasksService.deleteTask(taskId).subscribe(task => {
+      console.log(task);
+    });
+  }
+
 
 
 }

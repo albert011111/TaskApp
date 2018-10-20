@@ -2,8 +2,8 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/internal/Observable';
 import { BehaviorSubject } from 'rxjs/internal/BehaviorSubject';
 import { Task } from '../models/task';
-import { HttpClient } from '@angular/common/http';
-
+import { HttpClient, HttpParams } from '@angular/common/http';
+import { registerContentQuery } from '@angular/core/src/render3/instructions';
 
 
 
@@ -91,6 +91,10 @@ export class TaskService {
     return this.http.put<Task>(this.baseUrl, task);
   }
 
-
+  deleteTask(taskId: number): Observable<Task> {
+    // const taskParam = new HttpParams().set('taskId', taskId + '');
+    // console.log(this.baseUrl + '/' + taskParam);
+    return this.http.delete<Task>(this.baseUrl + '/' + taskId);
+  }
 
 }
