@@ -1,0 +1,24 @@
+div {
+  border-style: none;
+  border-color: black;
+
+
+  float: left;
+  width: 100%;
+
+  text-align: center;
+  clear: both;
+}
+
+
+table{
+  width: 70%;
+}
+
+.table-dark{
+  cursor: crosshair;
+  width: 50%;
+}
+
+
+
