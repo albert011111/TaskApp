@@ -1,6 +1,6 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
-import { TaskService } from '../services/tasks.service';
-import { Task } from '../models/task';
+import { TaskService } from '../tasks/service/tasks.service';
+import { Task } from '../tasks/model/task';
 import { FormControl, FormGroup } from '@angular/forms';
 
 @Component({

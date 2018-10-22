@@ -1,23 +1,8 @@
-table
-{
+html, body{
   width: 100%;
-  background-color: antiquewhite;
-  border: 3px solid black;
-  text-align: center;
-}
-tr{
-  border: 1px solid black;
+  height: 100%
 }
 
-td{
-  border: 1px solid  black;
+.navbar navbar-expand-lg navbar-light bg-light{
+width: 80%;
 }
-
-.color{
-  color: brown
-}
-
-.color2{
-  color: rgb(51, 210, 30);
-}
-

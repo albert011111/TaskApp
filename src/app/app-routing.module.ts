@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { TasksListComponent } from './tasks-list/tasks-list.component';
+import { TasksListComponent } from './tasks/tasks-list/tasks-list.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { DoneTaskComponent } from './done-task/done-task.component';
 

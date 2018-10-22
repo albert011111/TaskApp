@@ -11,15 +11,17 @@ import { ItemComponent } from './item/item.component';
 import { AddTaskComponent } from './add-task/add-task.component';
 import { TodoTaskComponent } from './todo-task/todo-task.component';
 import { DoneTaskComponent } from './done-task/done-task.component';
-import { TaskService } from './services/tasks.service';
+import { TaskService } from './tasks/service/tasks.service';
 import { CheckedDirective } from './shared/checked.directive';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { TransformTaskPipe } from './shared/transform-task.pipe';
 import { SortPipePipe } from './shared/sort-pipe.pipe';
 import { HttpClientModule } from '@angular/common/http';
-import { TasksListComponent } from './tasks-list/tasks-list.component';
+
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { AppRoutingModule } from './app-routing.module';
+import { TaskDetailComponent } from './tasks/task-detail/task-detail.component';
+import { TasksListComponent } from './tasks/tasks-list/tasks-list.component';
 
 
 @NgModule({
@@ -37,7 +39,8 @@ import { AppRoutingModule } from './app-routing.module';
     TransformTaskPipe,
     SortPipePipe,
     TasksListComponent,
-    PageNotFoundComponent
+    PageNotFoundComponent,
+    TaskDetailComponent
   ],
   bootstrap: [AppComponent],
   imports: [
