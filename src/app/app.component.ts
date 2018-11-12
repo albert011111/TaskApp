@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { TaskService } from './tasks/service/tasks.service';
-import { Task } from './tasks/model/task';
+import { Task } from './tasks/model/task.model';
 import { Observable } from 'rxjs';
 
 @Component({

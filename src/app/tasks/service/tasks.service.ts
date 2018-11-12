@@ -1,12 +1,10 @@
-import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs/internal/Observable';
-import { BehaviorSubject } from 'rxjs/internal/BehaviorSubject';
+import {Injectable} from '@angular/core';
+import {Observable} from 'rxjs/internal/Observable';
+import {BehaviorSubject} from 'rxjs/internal/BehaviorSubject';
 
-import { HttpClient, HttpParams } from '@angular/common/http';
-import { registerContentQuery } from '@angular/core/src/render3/instructions';
-import { Task } from '../model/task';
-
-
+import {HttpClient, HttpParams} from '@angular/common/http';
+import {registerContentQuery} from '@angular/core/src/render3/instructions';
+import {Task} from '../model/task.model';
 
 
 @Injectable()
@@ -24,8 +22,6 @@ export class TaskService {
   tasksDoneObservable = new BehaviorSubject<Array<Task>>([]);
 
 
-
-
   constructor(private http: HttpClient) {
     // this.tasksParent = [
     //   { name: 'Spacer z piesem', dateOfCreation: new Date() },
@@ -38,9 +34,6 @@ export class TaskService {
     // next(arg) -> dodanie do tasksDoneObservable
     this.tasksObservable.next(this.tasksParent);
   }
-
-
-
 
 
   public add(task: Task) {
@@ -56,7 +49,6 @@ export class TaskService {
   }
 
   public remove(task) {
-
     // usuwa element poprzez filtrowanie listy...
     this.tasksParent = this.tasksParent.filter(t => t !== task);
     this.tasksObservable.next(this.tasksParent);
@@ -86,6 +78,10 @@ export class TaskService {
   // tera moja tworczosc
   getTasks(): Observable<Array<Task>> {
     return this.http.get<Array<Task>>(this.baseUrl);
+  }
+
+  getTaskById(taskId: number): Observable<Task> {
+    return this.http.get<Task>(this.baseUrl + '/' + taskId);
   }
 
   addTask(task: Task): Observable<Task> {

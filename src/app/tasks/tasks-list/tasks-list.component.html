@@ -1,26 +1,29 @@
 <div padding=10px>
   <table class="table table-hover table-lg" align="center">
     <thead class="thead-dark">
-      <tr>
-        <th scope="col">LP.</th>
-        <th scope="col">Nazwa</th>
-        <th scope="col">Utworzono</th>
-        <th scope="col">ID</th>
-        <th scope="col">Akcja</th>
-      </tr>
+    <tr>
+      <th scope="col">LP.</th>
+      <th scope="col">Nazwa</th>
+      <th scope="col">Utworzono</th>
+      <th scope="col">ID</th>
+      <th scope="col">Akcja</th>
+    </tr>
     </thead>
     <tbody>
-      <tr class="table-dark" *ngFor="let task of tasks$ | async; let i = index"  (click)="onRowClick(task)" >
-        <td>{{i+1}}</td>
-        <td>{{task.name}}</td>
-        <td>{{task.createDate}}</td>
-        <td>{{task.id}}</td>
-        <td><button type="button" class="btn btn-outline-danger btn-sm" (click)="onDeleteClick(task.id)">Usuń</button></td>
-      </tr>
+    <!-- <tr class="table-dark" *ngFor="let task of tasks$ | async; let i = index " routerLink="/taskDetail/{{taskId}}"> -->
+    <tr class="table-dark" *ngFor="let task of tasks$ | async; let i = index " [routerLink]="['/taskDetail', task.id]">
+      <td>{{i+1}}</td>
+      <td>{{task.name}}</td>
+      <td>{{task.createDate}}</td>
+      <td>{{task.id}}</td>
+      <td>
+        <button type="button" class="btn btn-outline-danger btn-sm" (click)="onDeleteClick(task.id)">Usuń</button>
+      </td>
+    </tr>
     </tbody>
   </table>
 
 </div>
 <div>
-  <button type="button" class="btn btn-outline-dark btn-m">Dodaj zadanie</button>
+  <button type="button" class="btn btn-outline-secondary btn-light" [routerLink]="['/newTask']">Dodaj zadanie</button>
 </div>

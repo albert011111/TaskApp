@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { TaskService } from '../../tasks/service/tasks.service';
-import { Task } from '../../tasks/model/task';
+import { Task } from '../model/task.model';
 
 @Component({
   selector: 'app-tasks-list',
@@ -13,6 +13,7 @@ export class TasksListComponent implements OnInit {
   constructor(private tasksService: TaskService) { }
   tasks: Array<Task>;
   tasks$: Observable<Array<Task>>;
+  taskSelected: Task;
 
   ngOnInit() {
     this.getTasks();
@@ -28,11 +29,6 @@ export class TasksListComponent implements OnInit {
       console.log(task);
     });
   }
-
-  onRowClick(taskClicked: Task) {
-    console.log(taskClicked);
-  }
-
 
 
 }
