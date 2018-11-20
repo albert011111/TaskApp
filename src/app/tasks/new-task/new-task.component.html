@@ -14,7 +14,7 @@
       <!--VALIDATION-->
       <span
         *ngIf="!taskForm.get('taskName').valid && taskForm.get('taskName').touched"
-        class="help-block">Wprowadź poprawną nazwę zadania!</span>
+        class="alert-heading">Wprowadź poprawną nazwę zadania!</span>
     </div>
 
     <div class="form-group">
@@ -23,6 +23,9 @@
              id="createDate"
              class="form-control"
              formControlName="createDate">
+      <span
+        *ngIf="!taskForm.get('createDate').valid && taskForm.get('createDate').touched"
+        class="alert-heading">Wybierz datę utworzenai zadania!</span>
     </div>
 
     <div class="form-group">
@@ -38,8 +41,13 @@
         class="alert-heading">Wprowadź odpowiedni komentarz (min. 10 znaków)</span>
     </div>
 
-
+    <button
+      class="btn btn-dark"
+      type="submit"
+      [disabled]="taskForm.pristine || taskForm.invalid"
+    >Dodaj zadanie
+    </button>
   </form>
 
-  <button type="button" class="btn btn-dark" type="submit" (click)="onFormSubmit()">Dodaj!</button>
 </div>
+

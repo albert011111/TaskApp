@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {Task} from "../model/task.model"
-import {formatDate} from "@angular/common";
+import {TaskService} from "../service/tasks.service";
 
 
 @Component({
@@ -12,11 +12,15 @@ import {formatDate} from "@angular/common";
 
 
 export class NewTaskComponent implements OnInit {
-  readonly TASK_NAME_PATTERN = '^[A-Ź][a-z _]+';
+  readonly TASK_NAME_PATTERN = '^[A-Z]{1}[a-z _]+';
   taskForm: FormGroup;
 
   task = new Task();
   currentDate: Date;
+
+
+  constructor(private taskService: TaskService) {
+  }
 
   ngOnInit(): void {
     const taskNameValidators = [Validators.required, Validators.pattern(this.TASK_NAME_PATTERN)];
@@ -24,15 +28,23 @@ export class NewTaskComponent implements OnInit {
 
     this.currentDate = new Date();
     this.taskForm = new FormGroup({
-      taskName: new FormControl('Test zadania', taskNameValidators),
-      createDate: new FormControl(this.currentDate.toISOString().substring(0, 10)),
+      taskName: new FormControl(null, taskNameValidators),
+      createDate: new FormControl(this.currentDate.toISOString().substring(0, 10), Validators.required),
       description: new FormControl(null, descriptionValidators),
     });
 
   }
 
   onFormSubmit() {
-    console.log(this.currentDate.toISOString().substring(0, 10))
-    console.log(this.taskForm);
+    this.task.name = this.taskForm.get("taskName").value;
+    this.task.createDate = this.taskForm.get("createDate").value;
+    // console.log(this.task);
+
+    //TODO uzupelnić model Javovy o pole description
+    // this.task.name = this.taskForm.get("description").value;
+
+    this.taskService.addTask(this.task).subscribe(newTask => {
+      console.log("New task added: " + newTask);
+    });
   }
 }

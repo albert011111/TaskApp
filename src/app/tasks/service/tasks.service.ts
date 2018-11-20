@@ -2,8 +2,7 @@ import {Injectable} from '@angular/core';
 import {Observable} from 'rxjs/internal/Observable';
 import {BehaviorSubject} from 'rxjs/internal/BehaviorSubject';
 
-import {HttpClient, HttpParams} from '@angular/common/http';
-import {registerContentQuery} from '@angular/core/src/render3/instructions';
+import {HttpClient} from '@angular/common/http';
 import {Task} from '../model/task.model';
 
 
@@ -85,6 +84,9 @@ export class TaskService {
   }
 
   addTask(task: Task): Observable<Task> {
+    console.log("w addTask TaskService");
+
+    console.log(task);
     return this.http.put<Task>(this.baseUrl, task);
   }
 
