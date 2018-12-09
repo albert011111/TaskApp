@@ -38,13 +38,19 @@ export class NewTaskComponent implements OnInit {
   onFormSubmit() {
     this.task.name = this.taskForm.get("taskName").value;
     this.task.createDate = this.taskForm.get("createDate").value;
+    this.task.description = this.taskForm.get("description").value;
     // console.log(this.task);
 
     //TODO uzupelnić model Javovy o pole description
     // this.task.name = this.taskForm.get("description").value;
 
-    this.taskService.addTask(this.task).subscribe(newTask => {
-      console.log("New task added: " + newTask);
-    });
+    this.taskService.addTask(this.task)
+      .subscribe(
+        newTask => {
+          console.log("New task added: " + newTask)
+        },
+        (error) => {
+          console.warn("error" + error);
+        });
   }
 }

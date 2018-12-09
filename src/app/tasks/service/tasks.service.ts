@@ -84,8 +84,6 @@ export class TaskService {
   }
 
   addTask(task: Task): Observable<Task> {
-    console.log("w addTask TaskService");
-
     console.log(task);
     return this.http.put<Task>(this.baseUrl, task);
   }
