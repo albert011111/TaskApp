@@ -24,6 +24,11 @@ import {TasksListComponent} from './tasks/tasks-list/tasks-list.component';
 import {TaskModule} from './tasks/task.module';
 import {TaskRoutingModule} from './tasks/task-routing.module';
 import {NewTaskComponent} from "./tasks/new-task/new-task.component";
+import { LoginComponent } from './auth/login/login.component';
+import { RegisterComponent } from './auth/register/register.component';
+import { HomeComponent } from './auth/home/home.component';
+import { UserComponent } from './auth/user/user.component';
+import { AdminComponent } from './auth/admin/admin.component';
 
 
 @NgModule({
@@ -43,6 +48,11 @@ import {NewTaskComponent} from "./tasks/new-task/new-task.component";
     PageNotFoundComponent,
     TaskDetailComponent,
     NewTaskComponent,
+    LoginComponent,
+    RegisterComponent,
+    HomeComponent,
+    UserComponent,
+    AdminComponent,
 
   ],
   bootstrap: [AppComponent],

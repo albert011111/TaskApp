@@ -1,7 +1,6 @@
-import { Component, OnInit } from '@angular/core';
-import { TaskService } from './tasks/service/tasks.service';
-import { Task } from './tasks/model/task.model';
-import { Observable } from 'rxjs';
+import {Component} from '@angular/core';
+import {TaskService} from './tasks/service/tasks.service';
+import {TokenStorageService} from "./auth/token-storage.service";
 
 @Component({
   selector: 'app-root',
@@ -10,77 +9,12 @@ import { Observable } from 'rxjs';
 })
 export class AppComponent {
 
-  allTasks$: Observable<Array<Task>>;
+  // AUTHENTICATION FIELDS
+  private role: string[];
+  private authority: string;
 
-  constructor(private taskService: TaskService) { }
-
-  getTasks() {
-    this.allTasks$ = this.taskService.getTasks();
+  constructor(private tokenStorage: TokenStorageService/*private taskService: TaskService*/) {
   }
-
-  onClickAddTask() {
-    const date: Date = new Date();
-
-    const task: Task = ({
-      name: 'Szorowanie',
-      createDate: date,
-      // dateOfExecution: date.setDate(date.getDate() + 10)
-    });
-
-    this.taskService.addTask(task).subscribe(t => {
-      console.log(t);
-    });
-  }
-
-
-
-
-  // ----- W08_42 -----
-  // profession = 'programista';
-  // skill = 'walenie w chuja';
-
-  // constructor() {
-
-  // }
-
-
-
-
-
-
-  // inputText = 'Pole tekstowe';
-  // inputText2Way = '';
-  // button = true;
-  // showClick = '';
-
-
-  // colorClass = 'color';
-  // isDisable = true;
-
-  // onFocus() {
-  //   if (this.colorClass === 'color') {
-  //     this.colorClass = 'color2';
-  //   } else {
-  //     this.colorClass = 'color';
-  //   }
-  //   console.log('Color chanbged');
-  // }
-
-  // onClick(event) {
-  //   console.log(event);
-  // }
-
-  // onMouseMove(event) {
-  //   console.log('x: ' + event.clientX + ', y: ' + event.clientY);
-  // }
-
-  // onPaste() {
-  //   this.inputText = 'Skopiowane';
-  // }
-
-  // change() {
-  //   this.isDisable = !this.isDisable;
-  // }
 
 }
 
