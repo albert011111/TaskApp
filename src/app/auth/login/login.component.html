@@ -1,3 +1,34 @@
-<p>
-  login works!
-</p>
+<div class="container-fluid">
+  <br>
+
+  <form [formGroup]="loginForm" (ngSubmit)="onLoginSubmit()">
+    <label for="login">Login:</label>
+    <input
+      type="text"
+      id="login"
+      class="form-control"
+      formControlName="userLogin">
+
+    <label for="password">Hasło:</label>
+    <input
+      type="password"
+      id="password"
+      class="form-control"
+      formControlName="userPassword">
+
+    <hr class="">
+
+    <button
+      class="btn btn-info"
+      type="submit">
+      Zaloguj :)
+    </button>
+    <button
+      class="btn btn-danger"
+      type="button">
+      Anuluj :(
+    </button>
+  </form>
+
+
+</div>

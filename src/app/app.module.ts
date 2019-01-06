@@ -5,7 +5,6 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {AppComponent} from './app.component';
 import {HeaderComponent} from './header/header.component';
 import {FooterComponent} from './footer/footer.component';
-import {NavComponent} from './nav/nav.component';
 import {ContentComponent} from './content/content.component';
 import {ItemComponent} from './item/item.component';
 import {TodoTaskComponent} from './todo-task/todo-task.component';
@@ -24,11 +23,12 @@ import {TasksListComponent} from './tasks/tasks-list/tasks-list.component';
 import {TaskModule} from './tasks/task.module';
 import {TaskRoutingModule} from './tasks/task-routing.module';
 import {NewTaskComponent} from "./tasks/new-task/new-task.component";
-import { LoginComponent } from './auth/login/login.component';
-import { RegisterComponent } from './auth/register/register.component';
-import { HomeComponent } from './auth/home/home.component';
-import { UserComponent } from './auth/user/user.component';
-import { AdminComponent } from './auth/admin/admin.component';
+import {LoginComponent} from './auth/login/login.component';
+import {RegisterComponent} from './auth/register/register.component';
+import {HomeComponent} from './auth/home/home.component';
+import {UserComponent} from './auth/user/user.component';
+import {AdminComponent} from './auth/admin/admin.component';
+import {httpInterceptorProviders} from "./auth/auth-interceptor";
 
 
 @NgModule({
@@ -36,7 +36,6 @@ import { AdminComponent } from './auth/admin/admin.component';
     AppComponent,
     HeaderComponent,
     FooterComponent,
-    NavComponent,
     ContentComponent,
     ItemComponent,
     TodoTaskComponent,
@@ -59,7 +58,7 @@ import { AdminComponent } from './auth/admin/admin.component';
   imports: [
     BrowserModule, FormsModule, NgbModule, HttpClientModule, TaskModule, TaskRoutingModule, AppRoutingModule, ReactiveFormsModule
   ],
-  providers: [TaskService]
+  providers: [TaskService, httpInterceptorProviders]
 })
 export class AppModule {
 }

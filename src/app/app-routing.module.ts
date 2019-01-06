@@ -1,9 +1,9 @@
-import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
-import { TasksListComponent } from './tasks/tasks-list/tasks-list.component';
-import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
-import { DoneTaskComponent } from './done-task/done-task.component';
-import { asElementData } from '@angular/core/src/view';
+import {NgModule} from '@angular/core';
+import {RouterModule, Routes} from '@angular/router';
+import {TasksListComponent} from './tasks/tasks-list/tasks-list.component';
+import {PageNotFoundComponent} from './page-not-found/page-not-found.component';
+import {DoneTaskComponent} from './done-task/done-task.component';
+import {LoginComponent} from "./auth/login/login.component";
 
 const appRoutes: Routes = [
   {
@@ -13,6 +13,10 @@ const appRoutes: Routes = [
   {
     path: 'done-tasks',
     component: DoneTaskComponent
+  },
+  {
+    path: 'login',
+    component: LoginComponent
   },
   {
     path: '', redirectTo: 'tasks-list', pathMatch: 'full'
@@ -28,5 +32,6 @@ const appRoutes: Routes = [
 })
 
 
-export class AppRoutingModule { }
+export class AppRoutingModule {
+}
 

@@ -21,11 +21,11 @@ export class AuthService {
   }
 
 
-  attempAuth(credentials: AuthLoginInfo): Observable<JwtResponse> {
-    return this.http.post<JwtResponse>(this.loginUrl,credentials, httpOptions);
+  attemptAuth(credentials: AuthLoginInfo): Observable<JwtResponse> {
+    return this.http.post<JwtResponse>(this.loginUrl, credentials, httpOptions);
   }
 
-  register(registerBody: RegisterInfo):Observable<string>{
+  register(registerBody: RegisterInfo): Observable<string> {
     return this.http.post<string>(this.registerUrl, registerBody, httpOptions);
   }
 
