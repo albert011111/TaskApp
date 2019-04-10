@@ -1,34 +1,47 @@
-<div class="container-fluid">
+<div class="row">
+
   <br>
+  <div class="col-xs-12 col-sm-10 col-md-8 offset-sm-1 offset-md-2 mat-background-primary">
 
-  <form [formGroup]="loginForm" (ngSubmit)="onLoginSubmit()">
-    <label for="login">Login:</label>
-    <input
-      type="text"
-      id="login"
-      class="form-control"
-      formControlName="userLogin">
+    <form [formGroup]="loginForm" (ngSubmit)="onLoginSubmit()">
+      <label for="login">Login:</label>
+      <input
+        type="text"
+        id="login"
+        class="form-control"
+        formControlName="userLogin">
 
-    <label for="password">Hasło:</label>
-    <input
-      type="password"
-      id="password"
-      class="form-control"
-      formControlName="userPassword">
+      <label for="password">Hasło:</label>
+      <input
+        type="password"
+        id="password"
+        class="form-control"
+        formControlName="userPassword">
 
-    <hr class="">
+      <hr class="">
 
-    <button
-      class="btn btn-info"
-      type="submit">
-      Zaloguj :)
-    </button>
-    <button
-      class="btn btn-danger"
-      type="button">
-      Anuluj :(
-    </button>
-  </form>
+      <button
+        class="btn btn-info"
+        type="submit">
+        Zaloguj :)
+      </button>
 
+      <button
+        class="btn btn-danger"
+        type="button">
+        Wyczyść
+      </button>
+
+
+      <div *ngIf="!isLoggedSuccessfully">
+        <div class="alert alert-warning alert-dismissible">
+          <strong>Warning!</strong> Niepoprawne dane logowania!
+        </div>
+      </div>
+
+
+    </form>
+
+  </div>
 
 </div>

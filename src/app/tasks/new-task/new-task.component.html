@@ -5,7 +5,6 @@
   <form [formGroup]="taskForm" (ngSubmit)="onFormSubmit()">
     <div class="form-group">
       <label for="taskName">Nazwa zadania:</label>
-      <!--<input id="taskName" class="form-control" type="text" formControlName="taskName">-->
       <input
         type="text"
         id="taskName"
@@ -42,12 +41,19 @@
     </div>
 
     <button
-      class="btn btn-dark"
+      class="btn btn-outline-dark"
       type="submit"
       [disabled]="taskForm.pristine || taskForm.invalid"
     >Dodaj zadanie
     </button>
   </form>
+
+  <!--  <button
+      class="btn btn-outline-dark"
+      type="button"
+      [disabled]="taskForm.pristine || taskForm.invalid"
+    >Dodaj zadanie
+    </button>-->
 
 </div>
 

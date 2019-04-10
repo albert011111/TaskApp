@@ -4,6 +4,8 @@ import {TasksListComponent} from './tasks/tasks-list/tasks-list.component';
 import {PageNotFoundComponent} from './page-not-found/page-not-found.component';
 import {DoneTaskComponent} from './done-task/done-task.component';
 import {LoginComponent} from "./auth/login/login.component";
+import {RegisterComponent} from "./auth/register/register.component";
+import {AuthGuard} from "./auth/auth.guard";
 
 const appRoutes: Routes = [
   {
@@ -12,11 +14,16 @@ const appRoutes: Routes = [
   },
   {
     path: 'done-tasks',
-    component: DoneTaskComponent
+    component: DoneTaskComponent,
+    canActivate: [AuthGuard]
   },
   {
     path: 'login',
     component: LoginComponent
+  },
+  {
+    path: 'register',
+    component: RegisterComponent
   },
   {
     path: '', redirectTo: 'tasks-list', pathMatch: 'full'
@@ -27,7 +34,7 @@ const appRoutes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(appRoutes)],
+  imports: [RouterModule.forRoot(appRoutes, {enableTracing: true})],
   exports: [RouterModule]
 })
 

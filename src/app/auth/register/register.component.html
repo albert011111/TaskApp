@@ -1,3 +1,76 @@
-<p>
-  register works!
-</p>
+<br>
+<div class="container-fluid">
+  <div class="row justify-content-center">
+    <div class="col-6">
+      <h6> Zarejestruj się w aplikacji TO-DO używając poniższego formularza :)</h6>
+    </div>
+  </div>
+
+
+  <form [formGroup]="registerForm" (ngSubmit)="onRegisterSubmit()">
+
+    <div class="row justify-content-center">
+      <div class="col-8">
+        <label for="name">Imię:</label>
+        <input
+          type="text"
+          id="name"
+          class="form-control  form-control-sm shadow-sm"
+          formControlName="name">
+      </div>
+    </div>
+
+    <div class="row justify-content-center">
+      <div class="col-8">
+        <label for="username">Nazwa użytkownika:</label>
+        <input
+          type="text"
+          id="username"
+          class="form-control  form-control-sm shadow-sm"
+          formControlName="username">
+      </div>
+    </div>
+
+    <div class="row justify-content-center">
+      <div class="col-8">
+        <label for="email">Email:</label>
+        <input
+          type="text"
+          id="email"
+          class="form-control form-control-sm shadow-sm"
+          formControlName="email">
+      </div>
+    </div>
+
+    <div class="row justify-content-center">
+      <div class="col-8">
+        <label for="password">Hasło:</label>
+        <input
+          type="password"
+          id="password"
+          class="form-control  form-control-sm shadow-sm "
+          formControlName="password">
+
+        <hr class="">
+
+      </div>
+    </div>
+
+    <div class="row justify-content-center ">
+      <button
+        class="btn btn-outline-primary btn-sm mr-1 shadow-sm"
+        type="submit"
+        style="width: 100px">
+        Zarejestruj
+      </button>
+      <button
+        (click)="clearForm()"
+        class="btn btn-outline-danger btn-sm mr-1 shadow-sm"
+        type="button"
+        style="width: 100px">
+        Wyczyść
+      </button>
+    </div>
+
+  </form>
+</div>

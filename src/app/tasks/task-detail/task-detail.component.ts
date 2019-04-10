@@ -1,9 +1,7 @@
-import { Component, OnInit, Input } from '@angular/core';
-import { Task } from '../model/task.model';
-import { Router, ActivatedRoute, ParamMap, Params } from '@angular/router';
-import { switchMap } from 'rxjs/operators';
-import { TaskService } from '../service/tasks.service';
-import { Observable } from 'rxjs';
+import {Component, OnInit} from '@angular/core';
+import {Task} from '../model/task.model';
+import {ActivatedRoute, Params, Router} from '@angular/router';
+import {TaskService} from '../service/tasks.service';
 
 @Component({
   selector: 'app-task-detail',

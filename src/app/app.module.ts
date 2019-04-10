@@ -29,6 +29,7 @@ import {HomeComponent} from './auth/home/home.component';
 import {UserComponent} from './auth/user/user.component';
 import {AdminComponent} from './auth/admin/admin.component';
 import {httpInterceptorProviders} from "./auth/auth-interceptor";
+import {AuthGuard} from "./auth/auth.guard";
 
 
 @NgModule({
@@ -56,9 +57,9 @@ import {httpInterceptorProviders} from "./auth/auth-interceptor";
   ],
   bootstrap: [AppComponent],
   imports: [
-    BrowserModule, FormsModule, NgbModule, HttpClientModule, TaskModule, TaskRoutingModule, AppRoutingModule, ReactiveFormsModule
+    BrowserModule, ReactiveFormsModule, FormsModule, NgbModule, HttpClientModule, TaskModule, TaskRoutingModule, AppRoutingModule,
   ],
-  providers: [TaskService, httpInterceptorProviders]
+  providers: [TaskService, httpInterceptorProviders, AuthGuard]
 })
 export class AppModule {
 }

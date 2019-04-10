@@ -1,38 +1,52 @@
 <div class="mainCointainer">
   <h1 class="h3" align="center" width=80%>WITAJ W APLIKACJI TO-DO</h1>
 
+  <div class="col-sm-12 col-md-10 col-lg-8 offset-md-1 offset-lg-2">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
 
-  <nav class="navbar navbar-expand-lg navbar-light bg-light" >
+      <a class="navbar-brand" routerLink="/tasks-list">Lista zadań</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+              aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <!--<span class="navbar-toggler-icon"></span>-->
+      </button>
 
-    <a class="navbar-brand" routerLink="/tasks-list">Lista zadań</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-      aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
+      <a class="navbar-brand" routerLink="/done-tasks">Zadania wykonane</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+              aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <!--<span class="navbar-toggler-icon"></span>-->
+      </button>
 
-    <a class="navbar-brand" routerLink="/done-tasks">Zadania wykonane</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-      aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
+      <a class="navbar-brand" href="#">Ustawienia</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+              aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <!--<span class="navbar-toggler-icon"></span>-->
+      </button>
+
+      <ng-template [ngIf]="!isAuthenticated()">
+        <a class="navbar-brand ml-auto" routerLink="/login">Zaloguj!</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <!--<span class="navbar-toggler-icon"></span>-->
+        </button>
+
+        <a class="nav navbar-brand " routerLink="/register">Rejestracja!</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <!--<span class="navbar-toggler-icon"></span>-->
+        </button>
+      </ng-template>
+
+      <div *ngIf="isAuthenticated()">
+        <a class="navbar-brand ml-auto" routerLink="/login" (click)="logOut2()">Wyloguj...</a>
+      </div>
 
 
-    <a class="navbar-brand" routerLink="/login">Zaloguj!</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
+    </nav>
+    <router-outlet></router-outlet>
+    <div class="navbar fixed-bottom justify-content-center  text-black-50 pb-xl-5">
+      <app-footer></app-footer>
+    </div>
 
-
-    <a class="navbar-brand" href="#">Ustawienia</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-      aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-
-
-  </nav>
-  <router-outlet></router-outlet>
-  <app-footer align="center" vertical-align="bottom" ></app-footer>
+  </div>
 
 </div>

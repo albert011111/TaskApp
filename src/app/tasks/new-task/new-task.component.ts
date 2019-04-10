@@ -18,7 +18,6 @@ export class NewTaskComponent implements OnInit {
   task = new Task();
   currentDate: Date;
 
-
   constructor(private taskService: TaskService) {
   }
 
@@ -28,21 +27,16 @@ export class NewTaskComponent implements OnInit {
 
     this.currentDate = new Date();
     this.taskForm = new FormGroup({
-      taskName: new FormControl(null, taskNameValidators),
+      taskName: new FormControl('Testowe zadanie', taskNameValidators),
       createDate: new FormControl(this.currentDate.toISOString().substring(0, 10), Validators.required),
-      description: new FormControl(null, descriptionValidators),
+      description: new FormControl('Domyslny opis...', descriptionValidators),
     });
-
   }
 
   onFormSubmit() {
     this.task.name = this.taskForm.get("taskName").value;
     this.task.createDate = this.taskForm.get("createDate").value;
     this.task.description = this.taskForm.get("description").value;
-    // console.log(this.task);
-
-    //TODO uzupelnić model Javovy o pole description
-    // this.task.name = this.taskForm.get("description").value;
 
     this.taskService.addTask(this.task)
       .subscribe(

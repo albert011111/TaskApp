@@ -1,6 +1,6 @@
 import {Component} from '@angular/core';
-import {TaskService} from './tasks/service/tasks.service';
 import {TokenStorageService} from "./auth/token-storage.service";
+import {AuthService} from "./auth/auth.service";
 
 @Component({
   selector: 'app-root',
@@ -13,7 +13,17 @@ export class AppComponent {
   private role: string[];
   private authority: string;
 
-  constructor(private tokenStorage: TokenStorageService/*private taskService: TaskService*/) {
+  constructor(private tokenStorage: TokenStorageService,
+              public authService: AuthService/*private taskService: TaskService*/) {
+  }
+
+  isAuthenticated(): boolean {
+    return this.tokenStorage.getToken() != null;
+  }
+
+  logOut2() {
+    console.log("onClick!");
+    this.tokenStorage.logOut();
   }
 
 }

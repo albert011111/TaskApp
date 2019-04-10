@@ -15,6 +15,7 @@ export class TokenStorageService {
 
   //czysci wszystkie dane w przegladarce --> token itp.
   logOut() {
+    console.log("in token storage");
     window.sessionStorage.clear();
   }
 
