@@ -1,0 +1,23 @@
+<p>
+  {{month.id}}
+  {{month.name}}
+  {{month.days.length}}
+</p>
+
+<div class="container-fluid" style="border: 1px solid coral">
+
+  <div class="row justify-content-center">
+
+    <ng-container *ngFor="let day of month.days">
+      <div
+        id="dayDiv"
+        class="col-6 col-md-4 col-lg-2 "
+        style="border: 1px solid aliceblue; height: 100px">
+        DAY
+      </div>
+
+    </ng-container>
+
+  </div>
+
+</div>

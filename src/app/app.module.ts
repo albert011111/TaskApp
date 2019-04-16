@@ -30,6 +30,7 @@ import {UserComponent} from './auth/user/user.component';
 import {AdminComponent} from './auth/admin/admin.component';
 import {httpInterceptorProviders} from "./auth/auth-interceptor";
 import {AuthGuard} from "./auth/auth.guard";
+import {CalendarComponent} from './calendar/calendar.component';
 
 
 @NgModule({
@@ -53,6 +54,7 @@ import {AuthGuard} from "./auth/auth.guard";
     HomeComponent,
     UserComponent,
     AdminComponent,
+    CalendarComponent,
 
   ],
   bootstrap: [AppComponent],

@@ -6,6 +6,7 @@ import {DoneTaskComponent} from './done-task/done-task.component';
 import {LoginComponent} from "./auth/login/login.component";
 import {RegisterComponent} from "./auth/register/register.component";
 import {AuthGuard} from "./auth/auth.guard";
+import {CalendarComponent} from "./calendar/calendar.component";
 
 const appRoutes: Routes = [
   {
@@ -16,6 +17,10 @@ const appRoutes: Routes = [
     path: 'done-tasks',
     component: DoneTaskComponent,
     canActivate: [AuthGuard]
+  },
+  {
+    path: 'calendar',
+    component: CalendarComponent
   },
   {
     path: 'login',
@@ -34,7 +39,7 @@ const appRoutes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(appRoutes, {enableTracing: true})],
+  imports: [RouterModule.forRoot(appRoutes, /*{enableTracing: true}*/)],
   exports: [RouterModule]
 })
 
