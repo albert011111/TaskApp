@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {MonthService} from "./month/month.service";
 import {Month} from "./month/month.model";
+import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
 
 @Component({
   selector: 'app-calendar',
@@ -10,7 +11,7 @@ import {Month} from "./month/month.model";
 export class CalendarComponent implements OnInit {
   month: Month;
 
-  constructor(public monthService: MonthService) {
+  constructor(private monthService: MonthService, private modalService: NgbModal) {
     console.log("C | calendar.component")
   }
 
@@ -20,4 +21,12 @@ export class CalendarComponent implements OnInit {
     this.month = this.monthService.month;
   }
 
+  divOnClick(event) {
+    this.modalService.open(event);
+  }
+
+  divOnHover(event) {
+    console.log("hovered");
+    console.log(event.target.innerHTML);
+  }
 }

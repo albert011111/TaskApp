@@ -1,5 +1,6 @@
 import {Injectable} from '@angular/core';
 import {Month} from "./month.model";
+import {Day} from "../day/day.model";
 import {WeekDay} from "@angular/common";
 
 @Injectable({
@@ -11,8 +12,8 @@ export class MonthService {
   constructor() {
     console.log("C | month.service");
     this.month = {
-      id: 100,
-      name: WeekDay[WeekDay.Monday],
+      id: 1,
+      name: 'April',
       days: []
     };
 
@@ -20,8 +21,41 @@ export class MonthService {
   }
 
   private setupDaysArray() {
-    for (let i = 1; i < 31; i++) {
-      this.month.days.push(i);
-    }
+
+    let day1: Day = {
+      id: 1,
+      date: new Date(2019, 4, 1),
+      dayOfWeek: WeekDay.Monday.toString(),
+      month: this.month,
+      tasks: [],
+      isHoliday: false
+    };
+
+    this.month.days.push(day1);
+
+    let day2: Day = {
+      id: 2,
+      date: new Date(2019, 4, 2),
+      dayOfWeek: WeekDay.Tuesday.toString(),
+      month: this.month,
+      tasks: [],
+      isHoliday: false
+    };
+
+    this.month.days.push(day2);
+
+    let day3: Day = {
+      id: 3,
+      date: new Date(2019, 4, 3),
+      dayOfWeek: WeekDay.Wednesday.toString(),
+      month: this.month,
+      tasks: [],
+      isHoliday: true
+    };
+
+    this.month.days.push(day3);
+
   }
+
+
 }
