@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {Month} from "./month.model";
-import {Day} from "../day/day.model";
-import {WeekDay} from "@angular/common";
+import {DayService} from "../day/day.service";
+import {HttpClient} from "@angular/common/http";
 
 @Injectable({
   providedIn: 'root'
@@ -9,53 +9,20 @@ import {WeekDay} from "@angular/common";
 export class MonthService {
   month: Month;
 
-  constructor() {
+  private basePath = 'http://localhost:8080/api/months';
+
+  constructor(private dayService: DayService, private http: HttpClient) {
     console.log("C | month.service");
-    this.month = {
-      id: 1,
-      name: 'April',
-      days: []
-    };
 
-    this.setupDaysArray();
+    dayService.fetchDays(this.month).subscribe(value => {
+      this.month.days = value;
+    });
   }
 
-  private setupDaysArray() {
-
-    let day1: Day = {
-      id: 1,
-      date: new Date(2019, 4, 1),
-      dayOfWeek: WeekDay.Monday.toString(),
-      month: this.month,
-      tasks: [],
-      isHoliday: false
-    };
-
-    this.month.days.push(day1);
-
-    let day2: Day = {
-      id: 2,
-      date: new Date(2019, 4, 2),
-      dayOfWeek: WeekDay.Tuesday.toString(),
-      month: this.month,
-      tasks: [],
-      isHoliday: false
-    };
-
-    this.month.days.push(day2);
-
-    let day3: Day = {
-      id: 3,
-      date: new Date(2019, 4, 3),
-      dayOfWeek: WeekDay.Wednesday.toString(),
-      month: this.month,
-      tasks: [],
-      isHoliday: true
-    };
-
-    this.month.days.push(day3);
-
+  fetchMonth(monthName: string) {
+    return this.http.get<Month>(this.basePath + "/" + monthName)
+      .subscribe(data => {
+        this.month = data;
+      });
   }
-
-
 }

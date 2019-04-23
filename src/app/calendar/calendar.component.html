@@ -1,7 +1,7 @@
 <p>
   {{month.id}}
   {{month.name}}
-  {{month.days.length}}
+  <!--{{month.days.length}}-->
 </p>
 
 <div class="container-fluid" style="border: 1px solid coral">
@@ -13,13 +13,16 @@
         id="dayDiv"
         class="col-6 col-md-4 col-lg-2 "
         style="border: 1px solid aliceblue; height: 100px"
-        (click)="divOnClick(content)"
-        (mouseover)="divOnHover($event)"
-        [routerLink]="['/dayDetail', day]">
-        {{day.id}}
-        {{day.dayOfWeek}}
-        {{day.date}}
-        {{day.isHoliday}}
+        (mouseover)="divOnHover($event)">
+
+        DAY: {{day.dayOfWeek}}
+
+        <button
+          type="submit"
+          class="btn btn-outline-dark btn-sm  btn-block mt-4"
+          (click)="divOnClick(content,day.id)"> Szczegóły
+        </button>
+
       </div>
 
     </ng-container>
@@ -39,7 +42,11 @@
   </div>
 
   <div class="modal-body">
-    <p></p>
+    Id:<p>{{selectedDay.id}}</p>
+    Dzień tygodnia<p>{{selectedDay.dayOfWeek}}</p>
+    Data: <p>{{selectedDay.date | date}}</p>
+    Lista zadań: <p>{{selectedDay.tasks.length}}</p>
+
   </div>
 
   <div class="modal-footer">
