@@ -1,7 +1,7 @@
 <p>
   {{month.id}}
   {{month.name}}
-  <!--{{month.days.length}}-->
+  {{month.days != null ? month.days.length : 'brak'}}
 </p>
 
 <div class="container-fluid" style="border: 1px solid coral">
@@ -12,15 +12,15 @@
       <div
         id="dayDiv"
         class="col-6 col-md-4 col-lg-2 "
-        style="border: 1px solid aliceblue; height: 100px"
-        (mouseover)="divOnHover($event)">
+        style="border: 1px solid aliceblue; height: 100px">
 
         DAY: {{day.dayOfWeek}}
 
         <button
           type="submit"
           class="btn btn-outline-dark btn-sm  btn-block mt-4"
-          (click)="divOnClick(content,day.id)"> Szczegóły
+          (click)="divOnClick(content,day)">
+          Szczegóły
         </button>
 
       </div>

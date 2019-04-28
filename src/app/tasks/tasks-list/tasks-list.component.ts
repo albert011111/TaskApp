@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
-import { Observable } from 'rxjs';
-import { TaskService } from '../../tasks/service/tasks.service';
-import { Task } from '../model/task.model';
+import {Component, OnInit} from '@angular/core';
+import {Observable} from 'rxjs';
+import {TaskService} from '../../tasks/service/tasks.service';
+import {Task} from '../model/task.model';
 
 @Component({
   selector: 'app-tasks-list',
@@ -10,10 +10,13 @@ import { Task } from '../model/task.model';
 })
 export class TasksListComponent implements OnInit {
 
-  constructor(private tasksService: TaskService) { }
+  private isDisabledProperty: boolean = true;
+
   tasks: Array<Task>;
   tasks$: Observable<Array<Task>>;
-  taskSelected: Task;
+
+  constructor(private tasksService: TaskService) {
+  }
 
   ngOnInit() {
     this.getTasks();
@@ -30,5 +33,13 @@ export class TasksListComponent implements OnInit {
     });
   }
 
+  isDisabled(): boolean {
+    return this.isDisabledProperty;
+  }
 
+
+  enableNewTask($event) {
+    console.log($event);
+    this.isDisabledProperty = !this.isDisabledProperty;
+  }
 }

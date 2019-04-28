@@ -11,7 +11,7 @@ import {DayService} from "./day/day.service";
   styleUrls: ['./calendar.component.css']
 })
 export class CalendarComponent implements OnInit {
-  month: Month;
+  month: Month = new Month();
   selectedDay: Day;
 
   constructor(private monthService: MonthService,
@@ -22,22 +22,24 @@ export class CalendarComponent implements OnInit {
 
   ngOnInit() {
     console.log("onInit | calendar.component");
-
-    this.monthService.fetchMonth("april");
-    this.month = this.monthService.month;
-    this.dayService.fetchDaysByMonth("april");
-    this.month.days = this.dayService.days;
+    this.fetchMonth();
   }
 
-  divOnClick(content, dayId) {
-    console.log(dayId);
-    this.selectedDay = this.dayService.getDayById(dayId);
-    console.log(this.selectedDay);
+  divOnClick(content, day) {
+    console.log(day);
+    this.selectedDay = day;
     this.modalService.open(content);
   }
 
-  divOnHover(event) {
-    console.log("hovered");
-    console.log(event.target.innerHTML);
+  private fetchMonth() {
+    this.monthService.fetchMonth("april").subscribe(value => {
+        this.month = value;
+        this.dayService.fetchDaysByMonth(this.month.name).subscribe(daysData => {
+          this.month.days = daysData;
+        });
+      },
+      error => {
+        console.warn("error during data fetching | " + error)
+      });
   }
 }

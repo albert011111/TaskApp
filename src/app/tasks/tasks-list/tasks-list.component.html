@@ -24,6 +24,21 @@
   </table>
 
 </div>
+
 <div>
-  <button class="btn btn-outline-secondary btn-light" [routerLink]="['/newTask']">Nowe zadanie</button>
+  <button class="btn btn-outline-secondary btn-light btn-sm"
+          [routerLink]="['/newTask']"
+          [disabled]="isDisabled()">
+    Nowe zadanie
+  </button>
 </div>
+
+
+<div>
+  <button class="btn btn-outline-danger btn-sm"
+          (click)="enableNewTask($event)">
+    Przełącz
+  </button>
+</div>
+
+

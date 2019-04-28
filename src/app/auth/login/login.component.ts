@@ -14,7 +14,7 @@ export class LoginComponent implements OnInit {
   readonly MIN_PASSWORD_LENGTH = 6;
   private loginInfo: AuthLoginInfo;
   private isLogged: boolean = true;
-  private loginForm: FormGroup;
+  public loginForm: FormGroup;
 
   constructor(private authService: AuthService,
               private tokenStorage: TokenStorageService,
