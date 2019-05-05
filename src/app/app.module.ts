@@ -31,6 +31,7 @@ import {AdminComponent} from './auth/admin/admin.component';
 import {httpInterceptorProviders} from "./auth/auth-interceptor";
 import {AuthGuard} from "./auth/auth.guard";
 import {CalendarComponent} from './calendar/calendar.component';
+import {TaskAvailableDirective} from './shared/task-available.directive';
 
 
 @NgModule({
@@ -55,6 +56,7 @@ import {CalendarComponent} from './calendar/calendar.component';
     UserComponent,
     AdminComponent,
     CalendarComponent,
+    TaskAvailableDirective,
 
   ],
   bootstrap: [AppComponent],

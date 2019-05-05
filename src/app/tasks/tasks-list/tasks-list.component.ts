@@ -22,15 +22,17 @@ export class TasksListComponent implements OnInit {
     this.getTasks();
   }
 
-  getTasks() {
-    this.tasks$ = this.tasksService.getTasks();
-  }
-
-  onDeleteClick(taskId: number) {
+  onDeleteClick(event, taskId: number) {
     console.log(taskId + ' onDeleteClick ');
     this.tasksService.deleteTask(taskId).subscribe(task => {
       console.log(task);
     });
+    this.getTasks();
+    event.stopPropagation();
+  }
+
+  getTasks() {
+    this.tasks$ = this.tasksService.getTasks();
   }
 
   isDisabled(): boolean {

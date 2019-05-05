@@ -1,10 +1,9 @@
-import { Directive, Renderer2, OnInit, ElementRef } from '@angular/core';
+import {Directive, ElementRef, OnInit, Renderer2} from '@angular/core';
 
 @Directive({
   selector: '[appChecked]'
 })
 export class CheckedDirective implements OnInit {
-
 
   constructor(private el: ElementRef, private renderer: Renderer2) { }
 

@@ -7,5 +7,5 @@ export class Day {
   dayOfWeek: string;
   month: Month;
   tasks: Array<Task> = [];
-  isHoliday: boolean = false;
+  holiday: boolean = false;
 }

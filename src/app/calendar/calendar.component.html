@@ -12,9 +12,11 @@
       <div
         id="dayDiv"
         class="col-6 col-md-4 col-lg-2 "
-        style="border: 1px solid aliceblue; height: 100px">
+        style="border: 1px solid aliceblue; height: 100px"
+        appTaskAdded
+        [ngClass]="{holidayStyle : day.holiday}">
 
-        DAY: {{day.dayOfWeek}}
+        {{ day.date | date:'d'}} {{day.dayOfWeek}}
 
         <button
           type="submit"
@@ -45,6 +47,7 @@
     Id:<p>{{selectedDay.id}}</p>
     Dzień tygodnia<p>{{selectedDay.dayOfWeek}}</p>
     Data: <p>{{selectedDay.date | date}}</p>
+    Dzień wolny: <p>{{selectedDay.holiday }}</p>
     Lista zadań: <p>{{selectedDay.tasks.length}}</p>
 
   </div>
