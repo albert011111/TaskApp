@@ -1,10 +1,37 @@
-<p>
-  {{month.id}}
-  {{month.name}}
-  {{month.days != null ? month.days.length : 'brak'}}
-</p>
-
 <div class="container-fluid" style="border: 1px solid coral">
+
+  <div class="row justify-content-center">
+
+    <button class="btn btn-outline-dark"
+            [ngStyle]="{'height':'50px'}"
+            [disabled]="isFirstMonthSelected()"
+            (click)="prevMonth()"> <
+    </button>
+
+    <button class="btn btn-outline-dark" [ngStyle]="{'width':'400px'}">{{displayedMonth}}</button>
+
+
+    <!--    <div class="dropdown">
+          <button class="btn btn-secondary dropdown-toggle" type="button" id="monthsCombobox" data-toggle="dropdown"
+                  aria-haspopup="true" aria-expanded="false">
+            Combobox
+          </button>
+
+          <div class="dropdown-menu" aria-labelledby="monthsCombobox">
+            <ng-container *ngFor="let month of months">
+              <a class="dropdown-item">{{month}}</a>
+            </ng-container>
+          </div>
+
+        </div>-->
+
+    <button class="btn btn-outline-dark"
+            [ngStyle]="{'width':'100px'}"
+            [disabled]="isLastMonthSelected()"
+            (click)="nextMonth()"> >
+    </button>
+
+  </div>
 
   <div class="row justify-content-center">
 
@@ -13,7 +40,7 @@
         id="dayDiv"
         class="col-6 col-md-4 col-lg-2 "
         style="border: 1px solid aliceblue; height: 100px"
-        appTaskAdded
+        appTaskAdded="hasTasksAvailable"
         [ngClass]="{holidayStyle : day.holiday}">
 
         {{ day.date | date:'d'}} {{day.dayOfWeek}}

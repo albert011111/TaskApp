@@ -9,13 +9,18 @@ export class TaskAvailableDirective implements OnInit {
   }
 
   ngOnInit(): void {
-
-    const el = this.renderer.createElement("el");
-    const text = this.renderer.createText("Click here");
-
-    this.renderer.appendChild(this.element.nativeElement, el);
+    this.appendTaskIcon();
   }
 
+  private appendTaskIcon() {
+    const icon = this.renderer.createElement("img");
+    const taskImage = "assets/task.svg";
+    this.renderer.setAttribute(icon, "src", taskImage);
+
+    const parent = this.element.nativeElement;
+    // console.log(parent);
+    this.renderer.appendChild(parent, icon);
+  }
 
   @HostListener("onmouseover", ['$event.target']) onMouseOver() {
     // this.renderer.setStyle(this.element.nativeElement, "backgroundImage", 'url(/assets/doneIcon.png)');
