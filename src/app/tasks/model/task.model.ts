@@ -4,11 +4,13 @@ export class Task {
   createDate: Date;
   executeDate?: Date;
   description?: string;
+  userName: string;
 
   constructor() {
     this.name = '';
     this.createDate = null;
     this.executeDate = null;
     this.description = '';
+    this.userName = '';
   }
 }

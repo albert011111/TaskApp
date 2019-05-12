@@ -40,14 +40,18 @@
         id="dayDiv"
         class="col-6 col-md-4 col-lg-2 "
         style="border: 1px solid aliceblue; height: 100px"
-        appTaskAdded="hasTasksAvailable"
         [ngClass]="{holidayStyle : day.holiday}">
 
-        {{ day.date | date:'d'}} {{day.dayOfWeek}}
+        {{ day.date | date:'d' }}
+
+        <div *ngIf="day.tasks.length > 0"
+             [ngStyle]="{float:'right'}"
+             appTaskAdded>
+        </div>
 
         <button
           type="submit"
-          class="btn btn-outline-dark btn-sm  btn-block mt-4"
+          class="btn btn-outline-dark btn-sm  btn-block"
           (click)="divOnClick(content,day)">
           Szczegóły
         </button>
@@ -71,11 +75,18 @@
   </div>
 
   <div class="modal-body">
-    Id:<p>{{selectedDay.id}}</p>
-    Dzień tygodnia<p>{{selectedDay.dayOfWeek}}</p>
-    Data: <p>{{selectedDay.date | date}}</p>
-    Dzień wolny: <p>{{selectedDay.holiday }}</p>
-    Lista zadań: <p>{{selectedDay.tasks.length}}</p>
+    Id:
+    <p>{{selectedDay.id}}</p>
+    Dzień tygodnia
+    <p>{{selectedDay.dayOfWeek}}</p>
+    Data:
+    <p>{{selectedDay.date | date}}</p>
+    Dzień wolny:
+    <p>{{selectedDay.holiday }}</p>
+    Liczba zadań:
+    <div>
+      <p>[{{selectedDay.tasks.length}}] <span>Przeglądaj...</span></p>
+    </div>
 
   </div>
 

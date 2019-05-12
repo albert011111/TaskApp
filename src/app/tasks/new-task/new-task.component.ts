@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {Task} from "../model/task.model"
 import {TaskService} from "../service/tasks.service";
+import {TokenStorageService} from "../../auth/token-storage.service";
 
 
 @Component({
@@ -18,7 +19,7 @@ export class NewTaskComponent implements OnInit {
   task = new Task();
   currentDate: Date;
 
-  constructor(private taskService: TaskService) {
+  constructor(private taskService: TaskService, private tokenService: TokenStorageService) {
   }
 
   ngOnInit(): void {
@@ -37,6 +38,7 @@ export class NewTaskComponent implements OnInit {
     this.task.name = this.taskForm.get("taskName").value;
     this.task.createDate = this.taskForm.get("createDate").value;
     this.task.description = this.taskForm.get("description").value;
+    this.task.userName = this.tokenService.getUsername();
 
     this.taskService.addTask(this.task)
       .subscribe(

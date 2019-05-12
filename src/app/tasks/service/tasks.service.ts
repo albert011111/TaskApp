@@ -73,10 +73,8 @@ export class TaskService {
     return this.tasksDoneObservable.asObservable();
   }
 
-
-  // tera moja tworczosc
-  getTasks(): Observable<Array<Task>> {
-    return this.http.get<Array<Task>>(this.baseUrl);
+  getTasks(userName: string): Observable<Array<Task>> {
+    return this.http.get<Array<Task>>(this.baseUrl + '/users/' + userName);
   }
 
   getTaskById(taskId: number): Observable<Task> {
@@ -85,6 +83,7 @@ export class TaskService {
 
   addTask(task: Task): Observable<Task> {
     console.log(task);
+    console.log("USERNAME" + task.userName);
     return this.http.put<Task>(this.baseUrl, task);
   }
 

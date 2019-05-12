@@ -26,6 +26,4 @@ export class TaskAvailableDirective implements OnInit {
     // this.renderer.setStyle(this.element.nativeElement, "backgroundImage", 'url(/assets/doneIcon.png)');
     this.renderer.setStyle(this.element.nativeElement, "fontSize", "50px");
   }
-
-
 }

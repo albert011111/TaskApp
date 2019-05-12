@@ -8,4 +8,8 @@ export class Day {
   month: Month;
   tasks: Array<Task> = [];
   holiday: boolean = false;
+
+  private static hasTasks(): boolean {
+    return true;
+  }
 }

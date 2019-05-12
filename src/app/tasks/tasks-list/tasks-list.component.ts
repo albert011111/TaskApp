@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {Observable} from 'rxjs';
 import {TaskService} from '../../tasks/service/tasks.service';
 import {Task} from '../model/task.model';
+import {TokenStorageService} from "../../auth/token-storage.service";
 
 @Component({
   selector: 'app-tasks-list',
@@ -15,7 +16,7 @@ export class TasksListComponent implements OnInit {
   tasks: Array<Task>;
   tasks$: Observable<Array<Task>>;
 
-  constructor(private tasksService: TaskService) {
+  constructor(private tasksService: TaskService, private tokenService: TokenStorageService) {
   }
 
   ngOnInit() {
@@ -32,7 +33,7 @@ export class TasksListComponent implements OnInit {
   }
 
   getTasks() {
-    this.tasks$ = this.tasksService.getTasks();
+    this.tasks$ = this.tasksService.getTasks(this.tokenService.getUsername());
   }
 
   isDisabled(): boolean {
