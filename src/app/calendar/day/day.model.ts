@@ -12,4 +12,8 @@ export class Day {
   private static hasTasks(): boolean {
     return true;
   }
+
+  isSunday(): boolean {
+    return this.dayOfWeek.toLocaleUpperCase() === "SUNDAY";
+  }
 }

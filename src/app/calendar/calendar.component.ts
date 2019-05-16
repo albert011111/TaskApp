@@ -7,6 +7,7 @@ import {DayService} from "./day/day.service";
 import {TaskService} from "../tasks/service/tasks.service";
 import {formatDate} from "@angular/common";
 import {Months} from "../shared/models/months.enum";
+import {CommonDateService} from "../shared/services/common-date.service";
 
 @Component({
   selector: 'app-calendar',
@@ -22,6 +23,7 @@ export class CalendarComponent implements OnInit {
   constructor(private monthService: MonthService,
               private dayService: DayService,
               private taskService: TaskService,
+              private commonDateService: CommonDateService,
               private modalService: NgbModal) {
     console.log("C | calendar.component")
   }
@@ -63,17 +65,9 @@ export class CalendarComponent implements OnInit {
     this.fetchMonth(nextMonth);
   }
 
-  private fetchMonth(monthName: string) {
-    this.monthService.fetchMonth(monthName).subscribe(fetchedMonth => {
-        this.setupMonthSelections(fetchedMonth);
-
-        this.dayService.fetchDaysByMonth(this.month.name).subscribe(daysData => {
-          this.month.days = this.mockTasks(daysData);
-        });
-      },
-      error => {
-        console.warn("error during data fetching | " + error)
-      });
+  onAddNewTask(event, selectedDay: Day) {
+    this.commonDateService.selectedDate = selectedDay.date;
+    alert(this.commonDateService.selectedDate);
   }
 
   private setupMonthSelections(fetchedMonth: Month) {
@@ -85,29 +79,46 @@ export class CalendarComponent implements OnInit {
     return formatDate(selectedDate, "MMMM", "en");
   }
 
-  private divOnClick(content, day) {
-    console.log(day);
-    this.selectedDay = day;
-    this.modalService.open(content);
+  private fetchMonth(monthName: string) {
+    this.monthService.fetchMonth(monthName).subscribe(fetchedMonth => {
+        this.setupMonthSelections(fetchedMonth);
+
+        this.dayService.fetchDaysByMonth(this.month.name).subscribe(daysData => {
+          // this.month.days = this.mockTasks(daysData);
+          daysData.forEach(value => {
+            let value2 = new Day();
+            console.log(typeof value2);
+          });
+          this.month.days = daysData;
+        });
+      },
+      error => {
+        console.warn("error during data fetching | " + error)
+      });
   }
 
-  //TODO replace with http request
-  private mockTasks(days: Array<Day>): Array<Day> {
-    let daysWithTasks: Array<Day> = days;
+  /*  //TODO replace with http request
+    private mockTasks(days: Array<Day>): Array<Day> {
+      let daysWithTasks: Array<Day> = days;
 
-    daysWithTasks.forEach(day => {
-      this.taskService.getTasks().subscribe(fetchedTasks => {
+      daysWithTasks.forEach(day => {
+        this.taskService.getTasks().subscribe(fetchedTasks => {
 
-        console.log(fetchedTasks.length);
+          console.log(fetchedTasks.length);
 
-        if (day.id % 2 === 0) {
-          fetchedTasks.forEach(task => {
-            day.tasks.push(task);
-          })
-        }
+          if (day.id % 2 === 0) {
+            fetchedTasks.forEach(task => {
+              day.tasks.push(task);
+            })
+          }
       });
-    });
 
-    return daysWithTasks;
+      return daysWithTasks;
+    }*/
+
+  private dayDivOnClick(detailWindow, day: Day) {
+    console.log(day);
+    this.selectedDay = day;
+    this.modalService.open(detailWindow);
   }
 }

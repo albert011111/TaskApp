@@ -10,10 +10,9 @@ import {TokenStorageService} from "../../auth/token-storage.service";
   styleUrls: ['./tasks-list.component.css']
 })
 export class TasksListComponent implements OnInit {
-
   private isDisabledProperty: boolean = true;
 
-  tasks: Array<Task>;
+  // tasks: Array<Task>;
   tasks$: Observable<Array<Task>>;
 
   constructor(private tasksService: TaskService, private tokenService: TokenStorageService) {
@@ -23,12 +22,12 @@ export class TasksListComponent implements OnInit {
     this.getTasks();
   }
 
+  //TODO improve list refreshing after task remove (replace API call with array splice method)
   onDeleteClick(event, taskId: number) {
     console.log(taskId + ' onDeleteClick ');
     this.tasksService.deleteTask(taskId).subscribe(task => {
-      console.log(task);
+      this.getTasks();
     });
-    this.getTasks();
     event.stopPropagation();
   }
 
@@ -39,7 +38,6 @@ export class TasksListComponent implements OnInit {
   isDisabled(): boolean {
     return this.isDisabledProperty;
   }
-
 
   enableNewTask($event) {
     console.log($event);

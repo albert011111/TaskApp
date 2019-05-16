@@ -3,7 +3,7 @@
   <div class="row justify-content-center">
 
     <button class="btn btn-outline-dark"
-            [ngStyle]="{'height':'50px'}"
+            [ngStyle]="{'width':'100px'}"
             [disabled]="isFirstMonthSelected()"
             (click)="prevMonth()"> <
     </button>
@@ -52,8 +52,18 @@
         <button
           type="submit"
           class="btn btn-outline-dark btn-sm  btn-block"
-          (click)="divOnClick(content,day)">
+          (click)="dayDivOnClick(detailWindow,day)">
           Szczegóły
+        </button>
+
+        <button
+          type="submit"
+          class="btn btn-outline-success btn-sm  btn-block"
+          [routerLink]="['/newTask']"
+
+          (click)="onAddNewTask($event,day)"
+        >
+          Dodaj zadanie
         </button>
 
       </div>
@@ -65,7 +75,7 @@
 </div>
 
 
-<ng-template #content let-modal>
+<ng-template #detailWindow let-modal>
 
   <div class="modal-header">
     <h4 class="modal-title">Szczegóły dnia</h4>
@@ -77,12 +87,23 @@
   <div class="modal-body">
     Id:
     <p>{{selectedDay.id}}</p>
+
     Dzień tygodnia
     <p>{{selectedDay.dayOfWeek}}</p>
+
     Data:
     <p>{{selectedDay.date | date}}</p>
+
     Dzień wolny:
-    <p>{{selectedDay.holiday }}</p>
+    <div>
+      <label class="mat-checkbox">
+        <input type="checkbox"
+               [checked]="selectedDay.holiday"
+               [disabled]="false"
+        > Tak
+      </label>
+    </div>
+
     Liczba zadań:
     <div>
       <p>[{{selectedDay.tasks.length}}] <span>Przeglądaj...</span></p>

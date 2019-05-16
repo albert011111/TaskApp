@@ -8,9 +8,10 @@
       <th scope="col">ID</th>
       <th scope="col">Akcja</th>
     </tr>
+
     </thead>
     <tbody>
-    <!-- <tr class="table-dark" *ngFor="let task of tasks$ | async; let i = index " routerLink="/taskDetail/{{taskId}}"> -->
+
     <tr class="table-dark" *ngFor="let task of tasks$ | async; let i = index " [routerLink]="['/taskDetail', task.id]">
       <td>{{i+1}}</td>
       <td>{{task.name}}</td>
@@ -21,6 +22,7 @@
         </button>
       </td>
     </tr>
+
     </tbody>
   </table>
 
