@@ -20,20 +20,25 @@ export class CalendarComponent implements OnInit {
   displayedMonth: string = '';
   selectedDay: Day;
 
+  testDay: Day;
+
   constructor(private monthService: MonthService,
               private dayService: DayService,
               private taskService: TaskService,
               private commonDateService: CommonDateService,
               private modalService: NgbModal) {
-    console.log("C | calendar.component")
+    console.log("C | calendar.component");
+    this.testDay = new Day();
   }
 
   ngOnInit() {
     console.log("onInit | calendar.component");
 
-    Object.keys(Months).filter(value => !value.match("^[0-9]{1,2}")).forEach(value => {
-      this.months.push(value);
-    });
+    Object.keys(Months)
+      .filter(value => !value.match("^[0-9]{1,2}"))
+      .forEach(value => {
+        this.months.push(value);
+      });
 
     this.fetchMonth(this.retrieveMonthName(new Date()));
     this.displayedMonth = this.month.name;
@@ -67,6 +72,7 @@ export class CalendarComponent implements OnInit {
 
   onAddNewTask(event, selectedDay: Day) {
     this.commonDateService.selectedDate = selectedDay.date;
+    this.commonDateService.setupSelectedDay(selectedDay);
     alert(this.commonDateService.selectedDate);
   }
 
@@ -87,7 +93,7 @@ export class CalendarComponent implements OnInit {
           // this.month.days = this.mockTasks(daysData);
           daysData.forEach(value => {
             let value2 = new Day();
-            console.log(typeof value2);
+            console.log(value2);
           });
           this.month.days = daysData;
         });

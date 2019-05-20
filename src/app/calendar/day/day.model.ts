@@ -9,11 +9,14 @@ export class Day {
   tasks: Array<Task> = [];
   holiday: boolean = false;
 
-  private static hasTasks(): boolean {
-    return true;
+  isSunday(): boolean {
+    if (this.dayOfWeek === undefined) {
+      return false;
+    }
+    return this.dayOfWeek.toLocaleUpperCase() === "SUNDAY";
   }
 
-  isSunday(): boolean {
-    return this.dayOfWeek.toLocaleUpperCase() === "SUNDAY";
+  public testPrint(): string {
+    return "To jest testowy print klasy"
   }
 }

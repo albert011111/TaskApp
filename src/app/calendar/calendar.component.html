@@ -33,6 +33,10 @@
 
   </div>
 
+  <div>
+    <button class="btn btn-warning" (click)="testDay.testPrint()">{{testDay.isSunday()}}</button>
+  </div>
+
   <div class="row justify-content-center">
 
     <ng-container *ngFor="let day of month.days">

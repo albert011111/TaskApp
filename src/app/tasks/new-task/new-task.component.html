@@ -2,6 +2,8 @@
   <hr>
   <br>
 
+  <div *ngIf="selectedDay != null">{{selectedDay.id}}</div>
+
   <form [formGroup]="taskForm" (ngSubmit)="onFormSubmit() ">
     <div class="form-group">
       <label for="taskName">Nazwa zadania:</label>

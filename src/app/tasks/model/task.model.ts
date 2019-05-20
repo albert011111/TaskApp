@@ -4,6 +4,7 @@ export class Task {
   createDate: Date;
   executeDate?: Date;
   description?: string;
+  dayId?: number;
   userName: string;
 
   constructor() {
@@ -11,6 +12,7 @@ export class Task {
     this.createDate = null;
     this.executeDate = null;
     this.description = '';
+    this.dayId = null;
     this.userName = '';
   }
 }

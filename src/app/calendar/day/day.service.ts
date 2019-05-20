@@ -8,11 +8,12 @@ import {HttpClient} from "@angular/common/http";
 })
 export class DayService {
   private daysPath = 'http://localhost:8080/api/days';
+  private months = '/months';
   constructor(private http: HttpClient) {
   }
 
   fetchDaysByMonth(monthName: string): Observable<Array<Day>> {
-    return this.http.get<Array<Day>>(this.daysPath + "/" + monthName);
+    return this.http.get<Array<Day>>(this.daysPath + this.months + '/' + monthName);
   }
 
 }

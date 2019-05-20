@@ -84,6 +84,7 @@ export class TaskService {
   addTask(task: Task): Observable<Task> {
     console.log(task);
     console.log("USERNAME" + task.userName);
+    console.log("DAY" + task.dayId);
     return this.http.put<Task>(this.baseUrl, task);
   }
 
