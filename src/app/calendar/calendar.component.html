@@ -108,9 +108,14 @@
       </label>
     </div>
 
-    Liczba zadań:
-    <div>
-      <p>[{{selectedDay.tasks.length}}] <span>Przeglądaj...</span></p>
+
+    <div (click)="viewTaskList()">
+      <p [ngStyle]="{cursor: 'pointer'}">Liczba zadań: [{{selectedDay.tasks.length}}] <span>Przeglądaj...</span></p>
+
+      <p *ngIf="!isCollapsed">
+        <app-tasks-list></app-tasks-list>
+      </p>
+
     </div>
 
   </div>

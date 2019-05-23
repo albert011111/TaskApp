@@ -32,6 +32,7 @@ import {httpInterceptorProviders} from "./auth/auth-interceptor";
 import {AuthGuard} from "./auth/auth.guard";
 import {CalendarComponent} from './calendar/calendar.component';
 import {TaskAvailableDirective} from './shared/task-available.directive';
+import {WalletComponent} from './wallet/wallet.component';
 
 
 @NgModule({
@@ -57,6 +58,7 @@ import {TaskAvailableDirective} from './shared/task-available.directive';
     AdminComponent,
     CalendarComponent,
     TaskAvailableDirective,
+    WalletComponent,
 
   ],
   bootstrap: [AppComponent],

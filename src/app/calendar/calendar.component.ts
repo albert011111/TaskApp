@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {MonthService} from "./month/month.service";
 import {Month} from "./month/month.model";
 import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
@@ -14,11 +14,12 @@ import {CommonDateService} from "../shared/services/common-date.service";
   templateUrl: './calendar.component.html',
   styleUrls: ['./calendar.component.css']
 })
-export class CalendarComponent implements OnInit {
+export class CalendarComponent implements OnInit, OnDestroy {
   month: Month = new Month();
   months: Array<string> = [];
   displayedMonth: string = '';
   selectedDay: Day;
+  isCollapsed: boolean = true;
 
   testDay: Day;
 
@@ -42,6 +43,10 @@ export class CalendarComponent implements OnInit {
 
     this.fetchMonth(this.retrieveMonthName(new Date()));
     this.displayedMonth = this.month.name;
+  }
+
+  ngOnDestroy(): void {
+    this.isCollapsed = true;
   }
 
   public isFirstMonthSelected(): boolean {
@@ -85,18 +90,23 @@ export class CalendarComponent implements OnInit {
     return formatDate(selectedDate, "MMMM", "en");
   }
 
+  viewTaskList() {
+    this.isCollapsed = !this.isCollapsed;
+  }
+
   private fetchMonth(monthName: string) {
     this.monthService.fetchMonth(monthName).subscribe(fetchedMonth => {
         this.setupMonthSelections(fetchedMonth);
+        this.fetchTasks();
 
-        this.dayService.fetchDaysByMonth(this.month.name).subscribe(daysData => {
-          // this.month.days = this.mockTasks(daysData);
-          daysData.forEach(value => {
-            let value2 = new Day();
-            console.log(value2);
-          });
-          this.month.days = daysData;
-        });
+        /*        this.dayService.fetchDaysByMonth(this.month.name).subscribe(daysData => {
+                  // this.month.days = this.mockTasks(daysData);
+                  daysData.forEach(value => {
+                    let value2 = new Day();
+                    console.log(value2);
+                  });
+                  this.month.days = daysData;
+                });*/
       },
       error => {
         console.warn("error during data fetching | " + error)
@@ -126,5 +136,9 @@ export class CalendarComponent implements OnInit {
     console.log(day);
     this.selectedDay = day;
     this.modalService.open(detailWindow);
+  }
+
+  private fetchTasks() {
+
   }
 }

@@ -7,6 +7,7 @@ import {LoginComponent} from "./auth/login/login.component";
 import {RegisterComponent} from "./auth/register/register.component";
 import {AuthGuard} from "./auth/auth.guard";
 import {CalendarComponent} from "./calendar/calendar.component";
+import {WalletComponent} from "./wallet/wallet.component";
 
 const appRoutes: Routes = [
   {
@@ -17,6 +18,10 @@ const appRoutes: Routes = [
     path: 'done-tasks',
     component: DoneTaskComponent,
     canActivate: [AuthGuard]
+  },
+  {
+    path: 'wallet',
+    component: WalletComponent
   },
   {
     path: 'calendar',
