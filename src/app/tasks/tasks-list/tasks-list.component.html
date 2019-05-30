@@ -18,8 +18,14 @@
       <td>{{task.createDate}}</td>
       <td>{{task.id}}</td>
       <td>
-        <button type="button" class="btn btn-outline-danger btn-sm" (click)="onDeleteClick($event,task.id)">Usuń
-        </button>
+        <div>
+          <button type="button" class="btn btn-outline-success btn-sm" (click)="onEditClick($event,task.id)">
+            Edytuj
+          </button>
+          <button type="button" class="btn btn-outline-danger btn-sm" (click)="onDeleteClick($event,task.id)">
+            Usuń
+          </button>
+        </div>
       </td>
     </tr>
 

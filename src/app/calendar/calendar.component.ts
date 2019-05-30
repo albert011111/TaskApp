@@ -8,6 +8,7 @@ import {TaskService} from "../tasks/service/tasks.service";
 import {formatDate} from "@angular/common";
 import {Months} from "../shared/models/months.enum";
 import {CommonDateService} from "../shared/services/common-date.service";
+import {TokenStorageService} from "../auth/token-storage.service";
 
 @Component({
   selector: 'app-calendar',
@@ -26,6 +27,7 @@ export class CalendarComponent implements OnInit, OnDestroy {
   constructor(private monthService: MonthService,
               private dayService: DayService,
               private taskService: TaskService,
+              private tokenService: TokenStorageService,
               private commonDateService: CommonDateService,
               private modalService: NgbModal) {
     console.log("C | calendar.component");
@@ -61,14 +63,14 @@ export class CalendarComponent implements OnInit, OnDestroy {
       : this.displayedMonth.toLocaleUpperCase() === Months[11];
   }
 
-  private prevMonth() {
+  public prevMonth() {
     const previousMonth = Months[Months[this.displayedMonth] - 1];
     this.displayedMonth = previousMonth;
 
     this.fetchMonth(previousMonth);
   }
 
-  private nextMonth() {
+  public nextMonth() {
     const nextMonth = Months[Months[this.displayedMonth] + 1];
     this.displayedMonth = nextMonth;
 
@@ -81,6 +83,14 @@ export class CalendarComponent implements OnInit, OnDestroy {
     alert(this.commonDateService.selectedDate);
   }
 
+  public filterTasksByUser(): void {
+    let currentUser = this.tokenService.getUsername();
+
+    this.month.days.forEach(day => {
+      day.tasks = day.tasks.filter(task => task.user.username !== null && task.user.username === currentUser);
+    })
+  }
+
   private setupMonthSelections(fetchedMonth: Month) {
     this.month = fetchedMonth;
     this.displayedMonth = this.month.name.toLocaleUpperCase();
@@ -90,55 +100,24 @@ export class CalendarComponent implements OnInit, OnDestroy {
     return formatDate(selectedDate, "MMMM", "en");
   }
 
-  viewTaskList() {
-    this.isCollapsed = !this.isCollapsed;
-  }
-
   private fetchMonth(monthName: string) {
     this.monthService.fetchMonth(monthName).subscribe(fetchedMonth => {
+        console.warn(window.sessionStorage.getItem("AuthUsername"));
         this.setupMonthSelections(fetchedMonth);
-        this.fetchTasks();
-
-        /*        this.dayService.fetchDaysByMonth(this.month.name).subscribe(daysData => {
-                  // this.month.days = this.mockTasks(daysData);
-                  daysData.forEach(value => {
-                    let value2 = new Day();
-                    console.log(value2);
-                  });
-                  this.month.days = daysData;
-                });*/
+        this.filterTasksByUser();
       },
       error => {
         console.warn("error during data fetching | " + error)
       });
   }
 
-  /*  //TODO replace with http request
-    private mockTasks(days: Array<Day>): Array<Day> {
-      let daysWithTasks: Array<Day> = days;
-
-      daysWithTasks.forEach(day => {
-        this.taskService.getTasks().subscribe(fetchedTasks => {
-
-          console.log(fetchedTasks.length);
-
-          if (day.id % 2 === 0) {
-            fetchedTasks.forEach(task => {
-              day.tasks.push(task);
-            })
-          }
-      });
-
-      return daysWithTasks;
-    }*/
+  viewTaskList() {
+    this.isCollapsed = !this.isCollapsed;
+  }
 
   private dayDivOnClick(detailWindow, day: Day) {
     console.log(day);
     this.selectedDay = day;
     this.modalService.open(detailWindow);
-  }
-
-  private fetchTasks() {
-
   }
 }

@@ -31,6 +31,9 @@ export class TasksListComponent implements OnInit {
     event.stopPropagation();
   }
 
+  onEditClick(event, taskId: Task) {
+  }
+
   getTasks() {
     this.tasks$ = this.tasksService.getTasks(this.tokenService.getUsername());
   }

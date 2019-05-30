@@ -16,7 +16,9 @@ export class Day {
     return this.dayOfWeek.toLocaleUpperCase() === "SUNDAY";
   }
 
-  public testPrint(): string {
-    return "To jest testowy print klasy"
+  public testPrint(): void {
+    let tempArray: Array<number> = [1, 2, 5, 6];
+
+    return console.warn(tempArray.filter(value => value > 2));
   }
 }

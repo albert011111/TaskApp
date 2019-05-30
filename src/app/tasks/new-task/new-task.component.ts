@@ -56,7 +56,7 @@ export class NewTaskComponent implements OnInit, OnDestroy {
     this.task.createDate = this.taskForm.get("createDate").value;
     this.task.description = this.taskForm.get("description").value;
     this.task.userName = this.tokenService.getUsername();
-    // this.task.dayId = this.selectedDay.id;
+    this.task.dayId = this.selectedDay ? this.selectedDay.id : -1;
 
     this.taskService.addTask(this.task)
       .subscribe(

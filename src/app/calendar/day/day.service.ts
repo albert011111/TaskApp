@@ -16,4 +16,8 @@ export class DayService {
     return this.http.get<Array<Day>>(this.daysPath + this.months + '/' + monthName);
   }
 
+  getDayById(dayId: number): Observable<Day> {
+    return this.http.get<Day>(this.daysPath + '/' + dayId);
+  }
+
 }
