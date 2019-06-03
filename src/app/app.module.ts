@@ -5,9 +5,6 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {AppComponent} from './app.component';
 import {HeaderComponent} from './header/header.component';
 import {FooterComponent} from './footer/footer.component';
-import {ContentComponent} from './content/content.component';
-import {ItemComponent} from './item/item.component';
-import {TodoTaskComponent} from './todo-task/todo-task.component';
 import {DoneTaskComponent} from './done-task/done-task.component';
 import {TaskService} from './tasks/service/tasks.service';
 import {CheckedDirective} from './shared/checked.directive';
@@ -40,9 +37,6 @@ import {WalletComponent} from './wallet/wallet.component';
     AppComponent,
     HeaderComponent,
     FooterComponent,
-    ContentComponent,
-    ItemComponent,
-    TodoTaskComponent,
     DoneTaskComponent,
     CheckedDirective,
     TransformTaskPipe,

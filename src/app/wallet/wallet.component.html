@@ -1,6 +1,42 @@
 <div class="container-fluid border border-danger rounded">
-  <div class="row justify-content-center">
-    TUTAJ COSIK BEDZIE
+  <div class="row justify-content-center h3">
+    Miesiąc:
+  </div>
+  <hr>
+
+  <div class="border border-warning" href="#regularBillsTable" data-toggle="collapse"><h4>Wydatki regularne</h4></div>
+
+  <div id="regularBillsTable" class="collapse">
+
+    <table class="table table-hover">
+      <thead>
+      <tr>
+        <th>Lp.</th>
+        <th>Typ</th>
+        <th>Nazwa</th>
+        <th>Kwota</th>
+        <th>Uwagi</th>
+      </tr>
+      </thead>
+
+      <tbody>
+      <tr *ngFor="let bill of billTypes$ | async ; index as idx">
+        <td>{{idx + 1}}</td>
+        <td>{{bill}}</td>
+        <td>john@example.com</td>
+        <td>john@example.com</td>
+        <td>john@example.com</td>
+        <td>john@example.com</td>
+      </tr>
+
+      </tbody>
+    </table>
+
+  </div>
+  <hr>
+
+  <div>
+    Wydatki losowe
   </div>
 
   <div class="row justify-content-center">

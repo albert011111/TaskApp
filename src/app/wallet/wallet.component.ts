@@ -1,10 +1,11 @@
 import {Component, OnInit} from '@angular/core';
 import {WalletService} from "./service/wallet.service";
-import {BillType} from "../shared/models/bill-type.enum";
 import {Day} from "../calendar/day/day.model";
 import {DayService} from "../calendar/day/day.service";
 import {TaskService} from "../tasks/service/tasks.service";
 import {Task} from "../tasks/model/task.model";
+import {Bill} from "./bill/bill.model";
+import {Observable} from "rxjs/index";
 
 @Component({
   selector: 'app-wallet',
@@ -12,20 +13,23 @@ import {Task} from "../tasks/model/task.model";
   styleUrls: ['./wallet.component.css']
 })
 export class WalletComponent implements OnInit {
-  public billTypes: BillType[] = [];
+  public billTypes$: Observable<Bill[]>;
+  public bills: Bill[] = [];
 
-  constructor(private walletService: WalletService, private dayService: DayService, private taskService: TaskService) {
+  constructor(private walletService: WalletService,
+              private dayService: DayService,
+              private taskService: TaskService) {
   }
 
   ngOnInit() {
-    this.billTypes = this.fetchBills();
-    console.log(this.billTypes.length)
+    // this.setupBillTypes();
+    this.billTypes$ = this.walletService.fetchBills$();
   }
 
-  public fetchBills(): BillType[] {
-    this.walletService.getBillType().forEach(value => console.log(value));
-    return this.walletService.getBillType();
-  }
+  /*  public setupBillTypes(): void {
+      let billTypes = Object.keys(BillType);
+      this.billTypes = billTypes.slice(0,billTypes.length);
+    }*/
 
   public getRequest() {
     let testDay: Day = new Day();
