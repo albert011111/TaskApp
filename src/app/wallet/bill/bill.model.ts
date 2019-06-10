@@ -1,11 +1,11 @@
 import {BillType} from "../../shared/models/bill-type.enum";
 
 export class Bill {
-  constructor(private type: BillType,
-              private name?: string,
-              private amount?: number,
-              private price?: number,
-              private note ?: string) {
+  constructor(public type: BillType,
+              public name?: string,
+              public amount?: number,
+              public price?: number,
+              public note ?: string) {
   }
 
   public calcBillValue(): number {

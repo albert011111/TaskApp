@@ -30,6 +30,7 @@ import {AuthGuard} from "./auth/auth.guard";
 import {CalendarComponent} from './calendar/calendar.component';
 import {TaskAvailableDirective} from './shared/task-available.directive';
 import {WalletComponent} from './wallet/wallet.component';
+import {DivHoverDirective} from './shared/div-hover.directive';
 
 
 @NgModule({
@@ -53,6 +54,7 @@ import {WalletComponent} from './wallet/wallet.component';
     CalendarComponent,
     TaskAvailableDirective,
     WalletComponent,
+    DivHoverDirective,
 
   ],
   bootstrap: [AppComponent],

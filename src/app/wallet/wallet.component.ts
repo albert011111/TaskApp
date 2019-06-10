@@ -5,7 +5,6 @@ import {DayService} from "../calendar/day/day.service";
 import {TaskService} from "../tasks/service/tasks.service";
 import {Task} from "../tasks/model/task.model";
 import {Bill} from "./bill/bill.model";
-import {Observable} from "rxjs/index";
 
 @Component({
   selector: 'app-wallet',
@@ -13,9 +12,8 @@ import {Observable} from "rxjs/index";
   styleUrls: ['./wallet.component.css']
 })
 export class WalletComponent implements OnInit {
-  public billTypes$: Observable<Bill[]>;
   public bills: Bill[] = [];
-
+  public totalStandardBillsValue: number = 0;
   constructor(private walletService: WalletService,
               private dayService: DayService,
               private taskService: TaskService) {
@@ -23,7 +21,12 @@ export class WalletComponent implements OnInit {
 
   ngOnInit() {
     // this.setupBillTypes();
-    this.billTypes$ = this.walletService.fetchBills$();
+    this.walletService.fetchBills$().subscribe(bills => {
+      bills.forEach(bill => {
+        this.bills.push(bill);
+        this.totalStandardBillsValue += bill.calcBillValue();
+      });
+    });
   }
 
   /*  public setupBillTypes(): void {
@@ -48,4 +51,7 @@ export class WalletComponent implements OnInit {
     this.taskService.addTask(new Task()).subscribe();
   }
 
+  public setupPointer(): string {
+    return "{"
+  }
 }

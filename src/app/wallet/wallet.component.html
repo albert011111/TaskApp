@@ -4,7 +4,12 @@
   </div>
   <hr>
 
-  <div class="border border-warning" href="#regularBillsTable" data-toggle="collapse"><h4>Wydatki regularne</h4></div>
+  <div class="border border-warning"
+       href="#regularBillsTable"
+       data-toggle="collapse"
+       appDivHover="true">
+    <h4>Wydatki regularne: {{totalStandardBillsValue | currency: 'PLN '}}</h4>
+  </div>
 
   <div id="regularBillsTable" class="collapse">
 
@@ -12,24 +17,38 @@
       <thead>
       <tr>
         <th>Lp.</th>
-        <th>Typ</th>
+        <!--<th>Typ</th>-->
         <th>Nazwa</th>
+        <th>Ilosc</th>
+        <th>Cena</th>
         <th>Kwota</th>
         <th>Uwagi</th>
+        <th>Akcje</th>
       </tr>
       </thead>
 
       <tbody>
-      <tr *ngFor="let bill of billTypes$ | async ; index as idx">
+      <tr *ngFor="let bill of bills ; index as idx">
         <td>{{idx + 1}}</td>
-        <td>{{bill}}</td>
-        <td>john@example.com</td>
-        <td>john@example.com</td>
-        <td>john@example.com</td>
-        <td>john@example.com</td>
+        <td>{{bill.type}}</td>
+        <td>{{bill.amount}}</td>
+        <td>{{bill.price | currency : 'PLN '}}</td>
+        <!--<td>{{bill.name}}</td>-->
+        <td>{{bill.calcBillValue() | currency : 'PLN '}}</td>
+        <td>{{bill.note}}</td>
+        <td>
+          <button class="btn btn-sm btn-success">Edytuj</button>
+        </td>
       </tr>
-
       </tbody>
+
+      <tfoot>
+      <tr>
+        <th [attr.colspan]="4">Razem:</th>
+        <th [attr.colspan]="2">{{totalStandardBillsValue | currency: 'PLN '}}</th>
+      </tr>
+      </tfoot>
+
     </table>
 
   </div>
@@ -42,9 +61,9 @@
   <div class="row justify-content-center">
     <div class="col-sm-4 border border-dark">
       TYP RACHUNKU
-      <div *ngFor="let bill of billTypes">
-        {{bill}}
-      </div>
+      <!--      <div *ngFor="let bill of billTypes">
+              {{bill}}
+            </div>-->
     </div>
 
     <div class="col-sm-8 border border-dark">
