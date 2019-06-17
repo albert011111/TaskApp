@@ -55,10 +55,137 @@
   <hr>
 
   <div>
-    Wydatki losowe
+    <div class="border border-warning"
+         href="#extraBillsTable"
+         data-toggle="collapse"
+         appDivHover="true">
+      <h4>Wydatki losowe: </h4>
+    </div>
+
+    <div id="extraBillsForm" class="collapse">
+      <form [formGroup]="extraBillsForm">
+
+
+        <div formArrayName="extraBills">
+          <div *ngFor="let billForm of extraBillsForm.get('extraBills').controls; let i=index">
+
+            <div [formGroupName]="i">
+              <div class="form-row small">
+
+                <div class="form-group col-md-2">
+                  <label for="billName">Nazwa</label>
+                  <input type="text" id="billName" [ngClass]="getFormClass()">
+                </div>
+
+                <div class="form-group col-md-1">
+                  <label for="amount">Ilosc</label>
+                  <input type="number" id="amount" [ngClass]="getFormClass()" [min]="minValue">
+                </div>
+
+                <div class="form-group col-md-2">
+                  <label for="price">Cena</label>
+                  <input type="number" id="price" [ngClass]="getFormClass()" [min]="minValue">
+                </div>
+
+                <div class="form-group col-md-2">
+                  <label for="value">Kwota</label>
+                  <input type="number" id="value" [ngClass]="getFormClass()" [readonly]="true" [value]=1500>
+                </div>
+
+                <div class="form-group col-md-4 justify-content-center">
+                  <label>Uwagi</label>
+                  <div>
+                    <button class="btn btn-sm btn-outline dropdown-toggle btn-block" type="button" id="monthsCombobox"
+                            data-toggle="dropdown"
+                            aria-haspopup="true" aria-expanded="false">
+                      Combobox
+                    </button>
+
+                    <div class="dropdown-menu col-sm-6" aria-labelledby="monthsCombobox">
+                      <ul [ngStyle]="{'list-style-type': 'none'}">
+                        <li>Cena jednostkowa</li>
+                        <li>Cena za miesiac</li>
+                      </ul>
+                    </div>
+
+                  </div>
+
+                </div>
+
+              </div>
+
+            </div>
+          </div>
+
+        </div>
+
+      </form>
+    </div>
   </div>
 
-  <div class="row justify-content-center">
+
+  <!-- <div>
+     <div class="border border-warning"
+          href="#extraBillsTable"
+          data-toggle="collapse"
+          appDivHover="true">
+       <h4>Wydatki losowe: </h4>
+     </div>
+
+     <div id="extraBillsTable" class="collapse">
+
+       <form>
+         <div class="form-row small">
+
+           <div class="form-group col-md-2">
+             <label for="billName">Nazwa</label>
+             <input type="text" id="billName" [ngClass]="getFormClass()">
+           </div>
+
+           <div class="form-group col-md-1">
+             <label for="amount">Ilosc</label>
+             <input type="number" id="amount" [ngClass]="getFormClass()" [min]="minValue">
+           </div>
+
+           <div class="form-group col-md-2">
+             <label for="price">Cena</label>
+             <input type="number" id="price" [ngClass]="getFormClass()" [min]="minValue">
+           </div>
+
+           <div class="form-group col-md-2">
+             <label for="value">Kwota</label>
+             <input type="number" id="value" [ngClass]="getFormClass()" [readonly]="true" [value]=1500>
+           </div>
+
+           <div class="form-group col-md-4 justify-content-center">
+             <label>Uwagi</label>
+             <div>
+               <button class="btn btn-sm btn-outline dropdown-toggle btn-block" type="button" id="monthsCombobox"
+                       data-toggle="dropdown"
+                       aria-haspopup="true" aria-expanded="false">
+                 Combobox
+               </button>
+
+               <div class="dropdown-menu col-sm-6" aria-labelledby="monthsCombobox">
+                 <ul [ngStyle]="{'list-style-type': 'none'}">
+                   <li>Cena jednostkowa</li>
+                   <li>Cena za miesiac</li>
+                 </ul>
+               </div>
+
+             </div>
+
+           </div>
+
+         </div>
+       </form>
+
+     </div>
+
+   </div>-->
+
+  <div class=" row justify-content-center
+                ">
     <div class="col-sm-4 border border-dark">
       TYP RACHUNKU
       <!--      <div *ngFor="let bill of billTypes">

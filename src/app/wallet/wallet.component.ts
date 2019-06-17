@@ -5,6 +5,7 @@ import {DayService} from "../calendar/day/day.service";
 import {TaskService} from "../tasks/service/tasks.service";
 import {Task} from "../tasks/model/task.model";
 import {Bill} from "./bill/bill.model";
+import {FormBuilder, FormGroup} from "@angular/forms";
 
 @Component({
   selector: 'app-wallet',
@@ -13,13 +14,21 @@ import {Bill} from "./bill/bill.model";
 })
 export class WalletComponent implements OnInit {
   public bills: Bill[] = [];
+  public minValue: number = 0;
   public totalStandardBillsValue: number = 0;
-  constructor(private walletService: WalletService,
+
+  extraBillsForm: FormGroup;
+
+  constructor(private formBuilder: FormBuilder,
+              private walletService: WalletService,
               private dayService: DayService,
               private taskService: TaskService) {
   }
 
-  ngOnInit() {
+  ngOnInit(): void {
+    this.initExtraBillsFormArray();
+
+
     // this.setupBillTypes();
     this.walletService.fetchBills$().subscribe(bills => {
       bills.forEach(bill => {
@@ -28,6 +37,17 @@ export class WalletComponent implements OnInit {
       });
     });
   }
+
+  public getFormClass(): string {
+    return "form-control form-control-sm shadow-sm"
+  }
+
+  private initExtraBillsFormArray() {
+    this.extraBillsForm = this.formBuilder.group({
+      extraBills: this.formBuilder.array([this.buildExtraBill(), this.buildExtraBill(), this.buildExtraBill()])
+    });
+  }
+
 
   /*  public setupBillTypes(): void {
       let billTypes = Object.keys(BillType);
@@ -49,6 +69,16 @@ export class WalletComponent implements OnInit {
   public postRequest() {
     // let task: Task = new Task();
     this.taskService.addTask(new Task()).subscribe();
+  }
+
+  private buildExtraBill(): FormGroup {
+    return this.formBuilder.group({
+      billName: 'billName',
+      amount: 100,
+      price: 333,
+      value: 777,
+      notes: 'notes'
+    });
   }
 
   public setupPointer(): string {
