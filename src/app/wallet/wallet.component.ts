@@ -1,11 +1,11 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, ElementRef, OnInit} from '@angular/core';
 import {WalletService} from "./service/wallet.service";
 import {Day} from "../calendar/day/day.model";
 import {DayService} from "../calendar/day/day.service";
 import {TaskService} from "../tasks/service/tasks.service";
 import {Task} from "../tasks/model/task.model";
 import {Bill} from "./bill/bill.model";
-import {FormBuilder, FormGroup} from "@angular/forms";
+import {FormArray, FormBuilder, FormGroup} from "@angular/forms";
 
 @Component({
   selector: 'app-wallet',
@@ -17,19 +17,24 @@ export class WalletComponent implements OnInit {
   public minValue: number = 0;
   public totalStandardBillsValue: number = 0;
 
-  extraBillsForm: FormGroup;
+  // public extraBills: FormArray;
+  public extraBillsForm: FormGroup;
+  public buttonDescription: string = 'Edytuj';
+  private isEditing = false;
 
   constructor(private formBuilder: FormBuilder,
               private walletService: WalletService,
               private dayService: DayService,
-              private taskService: TaskService) {
+              private taskService: TaskService,
+              private elRef: ElementRef) {
   }
 
   ngOnInit(): void {
+    this.initBillsTable();
     this.initExtraBillsFormArray();
+  }
 
-
-    // this.setupBillTypes();
+  private initBillsTable() {
     this.walletService.fetchBills$().subscribe(bills => {
       bills.forEach(bill => {
         this.bills.push(bill);
@@ -38,21 +43,52 @@ export class WalletComponent implements OnInit {
     });
   }
 
-  public getFormClass(): string {
-    return "form-control form-control-sm shadow-sm"
-  }
-
   private initExtraBillsFormArray() {
     this.extraBillsForm = this.formBuilder.group({
-      extraBills: this.formBuilder.array([this.buildExtraBill(), this.buildExtraBill(), this.buildExtraBill()])
+      // extraBills: this.formBuilder.array([this.buildExtraBill(), this.buildExtraBill(), this.buildExtraBill()])
+      extraBills: this.formBuilder.array([this.buildExtraBill(), this.buildExtraBill()])
     });
   }
 
+  private buildExtraBill(): FormGroup {
+    return this.formBuilder.group({
+      billName: 'exampleName',
+      amount: 100,
+      price: 333,
+      value: 777,
+      notes: 'notes'
+    });
+  }
 
-  /*  public setupBillTypes(): void {
-      let billTypes = Object.keys(BillType);
-      this.billTypes = billTypes.slice(0,billTypes.length);
-    }*/
+  public getFormArrayElements(): FormArray {
+    return <FormArray>this.extraBillsForm.get('extraBills');
+  }
+
+  public editExtraBill(btnId: string): void {
+    console.log(btnId);
+    console.log(document.getElementById('btn' + btnId));
+    this.toggleBtnDescription()
+  }
+
+  private toggleBtnDescription() {
+    this.isEditing = !this.isEditing;
+    this.buttonDescription = this.isEditing ? 'Zapisz' : 'Edytuj'
+  }
+
+  public addNewExtraBill(): void {
+    let controls = <FormArray>this.extraBillsForm.controls.extraBills;
+    controls.push(this.buildExtraBill());
+  }
+
+  public removeExtraBill(extraBillName: number): void {
+    console.log(extraBillName);
+    this.getFormArrayElements().removeAt(extraBillName);
+  }
+
+
+  public getFormClass(): string {
+    return "form-control form-control-sm shadow-sm"
+  }
 
   public getRequest() {
     let testDay: Day = new Day();
@@ -69,19 +105,5 @@ export class WalletComponent implements OnInit {
   public postRequest() {
     // let task: Task = new Task();
     this.taskService.addTask(new Task()).subscribe();
-  }
-
-  private buildExtraBill(): FormGroup {
-    return this.formBuilder.group({
-      billName: 'billName',
-      amount: 100,
-      price: 333,
-      value: 777,
-      notes: 'notes'
-    });
-  }
-
-  public setupPointer(): string {
-    return "{"
   }
 }
