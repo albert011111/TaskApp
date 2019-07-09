@@ -19,18 +19,21 @@ import {TaskDetailComponent} from './tasks/task-detail/task-detail.component';
 import {TasksListComponent} from './tasks/tasks-list/tasks-list.component';
 import {TaskModule} from './tasks/task.module';
 import {TaskRoutingModule} from './tasks/task-routing.module';
-import {NewTaskComponent} from "./tasks/new-task/new-task.component";
+import {NewTaskComponent} from './tasks/new-task/new-task.component';
 import {LoginComponent} from './auth/login/login.component';
 import {RegisterComponent} from './auth/register/register.component';
 import {HomeComponent} from './auth/home/home.component';
 import {UserComponent} from './auth/user/user.component';
 import {AdminComponent} from './auth/admin/admin.component';
-import {httpInterceptorProviders} from "./auth/auth-interceptor";
-import {AuthGuard} from "./auth/auth.guard";
+import {httpInterceptorProviders} from './auth/auth-interceptor';
+import {AuthGuard} from './auth/auth.guard';
 import {CalendarComponent} from './calendar/calendar.component';
 import {TaskAvailableDirective} from './shared/task-available.directive';
 import {WalletComponent} from './wallet/wallet.component';
 import {DivHoverDirective} from './shared/div-hover.directive';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {MatMaterialModule} from './shared/mat-material/mat-material.module';
+import {ToggleDescDirective} from './shared/toggle-desc.directive';
 
 
 @NgModule({
@@ -55,13 +58,28 @@ import {DivHoverDirective} from './shared/div-hover.directive';
     TaskAvailableDirective,
     WalletComponent,
     DivHoverDirective,
+    ToggleDescDirective
+  ],
 
-  ],
   bootstrap: [AppComponent],
+
   imports: [
-    BrowserModule, ReactiveFormsModule, FormsModule, NgbModule, HttpClientModule, TaskModule, TaskRoutingModule, AppRoutingModule,
+    BrowserModule,
+    BrowserAnimationsModule,
+    MatMaterialModule,
+    ReactiveFormsModule,
+    FormsModule,
+    NgbModule,
+    HttpClientModule,
+    TaskModule,
+    TaskRoutingModule,
+    AppRoutingModule
   ],
-  providers: [TaskService, httpInterceptorProviders, AuthGuard]
+
+  providers: [
+    TaskService,
+    httpInterceptorProviders,
+    AuthGuard]
 })
 export class AppModule {
 }

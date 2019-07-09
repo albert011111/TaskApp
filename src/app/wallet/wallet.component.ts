@@ -1,11 +1,13 @@
 import {Component, ElementRef, OnInit} from '@angular/core';
-import {WalletService} from "./service/wallet.service";
-import {Day} from "../calendar/day/day.model";
-import {DayService} from "../calendar/day/day.service";
-import {TaskService} from "../tasks/service/tasks.service";
-import {Task} from "../tasks/model/task.model";
-import {Bill} from "./bill/bill.model";
-import {FormArray, FormBuilder, FormGroup} from "@angular/forms";
+import {WalletService} from './service/wallet.service';
+import {Day} from '../calendar/day/day.model';
+import {DayService} from '../calendar/day/day.service';
+import {TaskService} from '../tasks/service/tasks.service';
+import {Task} from '../tasks/model/task.model';
+import {Bill} from './bill/bill.model';
+import {FormArray, FormBuilder, FormGroup} from '@angular/forms';
+
+const EXTRA_BILLS: string = 'extraBills';
 
 @Component({
   selector: 'app-wallet',
@@ -17,9 +19,8 @@ export class WalletComponent implements OnInit {
   public minValue: number = 0;
   public totalStandardBillsValue: number = 0;
 
-  // public extraBills: FormArray;
   public extraBillsForm: FormGroup;
-  public buttonDescription: string = 'Edytuj';
+  public togglerDescription: string = 'Edytuj';
   private isEditing = false;
 
   constructor(private formBuilder: FormBuilder,
@@ -61,18 +62,18 @@ export class WalletComponent implements OnInit {
   }
 
   public getFormArrayElements(): FormArray {
-    return <FormArray>this.extraBillsForm.get('extraBills');
+    return <FormArray>this.extraBillsForm.get(EXTRA_BILLS);
   }
 
   public editExtraBill(btnId: string): void {
-    console.log(btnId);
-    console.log(document.getElementById('btn' + btnId));
-    this.toggleBtnDescription()
+    this.toggleBtnDescription();
   }
 
   private toggleBtnDescription() {
     this.isEditing = !this.isEditing;
-    this.buttonDescription = this.isEditing ? 'Zapisz' : 'Edytuj'
+    this.togglerDescription = this.isEditing
+      ? 'Zapisz'
+      : 'Edytuj';
   }
 
   public addNewExtraBill(): void {
@@ -87,7 +88,7 @@ export class WalletComponent implements OnInit {
 
 
   public getFormClass(): string {
-    return "form-control form-control-sm shadow-sm"
+    return 'form-control form-control-sm shadow-sm';
   }
 
   public getRequest() {
