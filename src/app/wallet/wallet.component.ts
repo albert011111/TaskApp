@@ -1,4 +1,4 @@
-import {Component, ElementRef, OnInit} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {WalletService} from './service/wallet.service';
 import {Day} from '../calendar/day/day.model';
 import {DayService} from '../calendar/day/day.service';
@@ -7,6 +7,8 @@ import {Task} from '../tasks/model/task.model';
 import {Bill} from './bill/bill.model';
 import {FormArray, FormBuilder, FormGroup} from '@angular/forms';
 
+const PRICE: string = 'price';
+const AMOUNT: string = 'amount';
 const EXTRA_BILLS: string = 'extraBills';
 
 @Component({
@@ -18,16 +20,12 @@ export class WalletComponent implements OnInit {
   public bills: Bill[] = [];
   public minValue: number = 0;
   public totalStandardBillsValue: number = 0;
-
   public extraBillsForm: FormGroup;
-  public togglerDescription: string = 'Edytuj';
-  private isEditing = false;
 
   constructor(private formBuilder: FormBuilder,
               private walletService: WalletService,
               private dayService: DayService,
-              private taskService: TaskService,
-              private elRef: ElementRef) {
+              private taskService: TaskService) {
   }
 
   ngOnInit(): void {
@@ -44,36 +42,79 @@ export class WalletComponent implements OnInit {
     });
   }
 
-  private initExtraBillsFormArray() {
+  private initExtraBillsFormArray(): void {
+    let bills: FormGroup[] = [];
+
+    this.walletService.fetchExtraBills$().subscribe(extraBills => {
+      extraBills.forEach(extraBill => {
+        let extraBillGroup = this.mapExtraBillToFormGroup(extraBill);
+
+        bills.push(extraBillGroup);
+      });
+      this.setupExtraBillsFormArray(bills);
+    });
+  }
+
+  private mapExtraBillToFormGroup(extraBill: Bill) {
+    return this.formBuilder.group({
+      billName: extraBill.name,
+      amount: extraBill.amount,
+      price: extraBill.price,
+      value: extraBill.calcBillValue(),
+      notes: extraBill.note
+    });
+  }
+
+  private setupExtraBillsFormArray(bills: FormGroup[]) {
     this.extraBillsForm = this.formBuilder.group({
-      // extraBills: this.formBuilder.array([this.buildExtraBill(), this.buildExtraBill(), this.buildExtraBill()])
-      extraBills: this.formBuilder.array([this.buildExtraBill(), this.buildExtraBill()])
+      extraBills: this.formBuilder.array(bills)
     });
   }
 
   private buildExtraBill(): FormGroup {
     return this.formBuilder.group({
-      billName: 'exampleName',
-      amount: 100,
-      price: 333,
-      value: 777,
-      notes: 'notes'
+      billName: '',
+      amount: null,
+      price: null,
+      value: null,
+      notes: ''
     });
   }
 
-  public getFormArrayElements(): FormArray {
+  public getExtraBillsFormArray(): FormArray {
     return <FormArray>this.extraBillsForm.get(EXTRA_BILLS);
   }
 
-  public editExtraBill(btnId: string): void {
-    this.toggleBtnDescription();
+  public getExtraBillsFormByIdx(idx: number): FormGroup {
+    return <FormGroup>this.getExtraBillsFormArray().at(idx);
   }
 
-  private toggleBtnDescription() {
-    this.isEditing = !this.isEditing;
-    this.togglerDescription = this.isEditing
-      ? 'Zapisz'
-      : 'Edytuj';
+  public extraBillFormOnEdit(idx: number): void {
+    const extraBillsFormGroup = this.getExtraBillsFormByIdx(idx);
+    if (extraBillsFormGroup.disabled) {
+      extraBillsFormGroup.enable();
+    } else {
+      extraBillsFormGroup.disable();
+    }
+  }
+
+  public countTotalExtraBillsValue(): number {
+    let totalValue: number = 0;
+    let formGroup: FormArray = this.getExtraBillsFormArray();
+
+    formGroup.controls.forEach(formGroup => {
+      totalValue += formGroup.get(PRICE).value;
+    });
+
+    return totalValue;
+  }
+
+  public calcBillValueByIdx(idx: number): number {
+    let extraBillFormGroup = this.getExtraBillsFormByIdx(idx);
+    let amount = extraBillFormGroup.get(AMOUNT).value;
+    let price = extraBillFormGroup.get(PRICE).value;
+
+    return amount === 0 || price === 0 ? 0 : amount * price;
   }
 
   public addNewExtraBill(): void {
@@ -83,9 +124,8 @@ export class WalletComponent implements OnInit {
 
   public removeExtraBill(extraBillName: number): void {
     console.log(extraBillName);
-    this.getFormArrayElements().removeAt(extraBillName);
+    this.getExtraBillsFormArray().removeAt(extraBillName);
   }
-
 
   public getFormClass(): string {
     return 'form-control form-control-sm shadow-sm';

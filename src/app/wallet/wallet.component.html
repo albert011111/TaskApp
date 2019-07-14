@@ -1,4 +1,4 @@
-<div class="container-fluid border border-danger rounded">
+<div class="container-fluid border border-danger rounded" xmlns="http://www.w3.org/1999/html">
   <div class="row justify-content-center h3">
     Miesiąc:
   </div>
@@ -59,7 +59,7 @@
          href="#extraBillsTable"
          data-toggle="collapse"
          appDivHover="true">
-      <h4>Wydatki losowe: </h4>
+      <h4>Wydatki losowe: {{countTotalExtraBillsValue() || 0 | currency: 'PLN '}}</h4>
     </div>
 
     <!--<div id="extraBillsForm" class="collapse">-->
@@ -67,7 +67,7 @@
 
       <form [formGroup]="extraBillsForm">
         <div formArrayName="extraBills">
-          <div *ngFor="let billForm of getFormArrayElements().controls; let i=index">
+          <div *ngFor="let billForm of getExtraBillsFormArray().controls; let i=index">
 
             <div [formGroupName]="i">
               <div class="form-row small">
@@ -82,14 +82,17 @@
                   <input type="number" id="amount" formControlName="amount" [ngClass]="getFormClass()" [min]="minValue">
                 </div>
 
-                <div class="form-group col-md-1">
+                <div class="form-group col-md-2">
                   <label for="price">Cena</label>
-                  <input type="number" id="price" [ngClass]="getFormClass()" [min]="minValue">
+                  <input type="number" id="price" formControlName="price" [ngClass]="getFormClass()" [min]="">
                 </div>
 
                 <div class="form-group col-md-2">
                   <label for="value">Kwota</label>
-                  <input type="number" id="value" [ngClass]="getFormClass()" [readonly]="true" [value]=1500>
+                  <input type="number" id="value"
+                         [ngClass]="getFormClass()"
+                         [readonly]="true"
+                         [value]="calcBillValueByIdx(i)">
                 </div>
 
                 <div class="form-group col-md-3 justify-content-center">
@@ -101,7 +104,7 @@
                       Combobox
                     </button>
 
-                    <div class="dropdown-menu col-sm-5" aria-labelledby="monthsCombobox">
+                    <div class="dropdown-menu col-sm-4" aria-labelledby="monthsCombobox">
                       <ul [ngStyle]="{'list-style-type': 'none'}">
                         <li>Cena jednostkowa</li>
                         <li>Cena za miesiac</li>
@@ -111,54 +114,55 @@
                   </div>
                 </div>
 
-                <div class="form-group col-md-3 justify-content-center">
+                <div class="form-group col-md-2 justify-content-center">
                   <label for="value">Akcja</label>
-                  <div class="btn-group-sm">
 
-                    <!--                    <button id="{{'btn' + i}}"
-                                                class="btn btn-sm btn-success"
-                                                [ngStyle]="{width: '50%'}"
-                                                (click)="editExtraBill(i)">
-                                          {{togglerDescription}}
-                                        </button>-->
+                  <!--                  <div>
+                                      <input type="checkbox"
+                                             (click)="getExtraBillsFormArray(i+'')"
+                                             [ngStyle]="{width: '50%'}"
+                                             [checked]="true"
+                                             >
+                                    </div>-->
 
-                    <mat-slide-toggle
-                      (click)="editExtraBill(i)"
-                      appToggleDesc>
-                      {{togglerDescription}}
-                    </mat-slide-toggle>
-
+                  <div>
+                    <button class="btn btn-sm btn-success"
+                            [ngStyle]="{width: '50%'}"
+                            [id]="'BillBtn' + i"
+                            (click)="extraBillFormOnEdit(i)">{{getExtraBillsFormByIdx(i).disabled ? "Edytuj" :
+                      "Zapisz"}}
+                    </button>
 
                     <button class="btn btn-sm btn-danger"
                             [ngStyle]="{width: '50%'}"
                             (click)="removeExtraBill(i)">X
                     </button>
-
                   </div>
                 </div>
 
               </div>
             </div>
+
           </div>
         </div>
       </form>
+    </div>
 
-      <div>
-        <button class="btn btn-sm btn-warning" (click)="addNewExtraBill()">Dodaj wiersz</button>
-      </div>
-
+    <div>
+      <button class="btn btn-sm btn-warning" (click)="addNewExtraBill()">Dodaj wiersz</button>
     </div>
 
   </div>
 
-  <div class=" row justify-content-center">
+</div>
 
-  </div>
+<div class=" row justify-content-center">
 
-  <div>
-    TESTOWANIE
+</div>
 
-    <button class="btn btn-sm btn-primary" (click)="getRequest()">Send request</button>
-    <button class="btn btn-sm btn-warning" (click)="postRequest()">Post request</button>
-  </div>
+<div>
+  TESTOWANIE
+
+  <button class="btn btn-sm btn-primary" (click)="getRequest()">Send request</button>
+  <button class="btn btn-sm btn-warning" (click)="postRequest()">Post request</button>
 </div>
